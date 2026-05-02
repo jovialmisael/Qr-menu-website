@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-container": "#606657",
+                    "on-surface-variant": "#514440",
+                    "on-background": "#1c1c19",
+                    "on-primary-fixed-variant": "#673b2e",
+                    "on-secondary-fixed": "#181d12",
+                    "inverse-primary": "#f6b8a6",
+                    "on-primary-container": "#fffbff",
+                    "secondary": "#5a6052",
+                    "surface-container": "#f0ede9",
+                    "surface-container-low": "#f6f3ee",
+                    "surface": "#fcf9f4",
+                    "surface-bright": "#fcf9f4",
+                    "primary": "#7f5041",
+                    "on-primary": "#ffffff",
+                    "surface-dim": "#dcdad5",
+                    "on-primary-fixed": "#331207",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "surface-container-highest": "#e5e2dd",
+                    "on-error-container": "#93000a",
+                    "primary-fixed": "#ffdbd0",
+                    "on-error": "#ffffff",
+                    "primary-container": "#9b6858",
+                    "tertiary-container": "#4f7d76",
+                    "on-tertiary-container": "#f4fffc",
+                    "secondary-fixed-dim": "#c3c9b7",
+                    "tertiary-fixed-dim": "#a0d0c8",
+                    "outline": "#84746f",
+                    "error-container": "#ffdad6",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-fixed": "#bbece4",
+                    "on-tertiary-fixed": "#00201d",
+                    "on-surface": "#1c1c19",
+                    "primary-fixed-dim": "#f6b8a6",
+                    "inverse-surface": "#31302d",
+                    "secondary-container": "#dfe5d2",
+                    "background": "#fcf9f4",
+                    "outline-variant": "#d6c2bd",
+                    "surface-container-high": "#ebe8e3",
+                    "on-secondary-fixed-variant": "#43493b",
+                    "surface-tint": "#825244",
+                    "surface-variant": "#e5e2dd",
+                    "on-tertiary-fixed-variant": "#1f4e48",
+                    "tertiary": "#36645d",
+                    "inverse-on-surface": "#f3f0eb",
+                    "secondary-fixed": "#dfe5d2",
+                    "error": "#ba1a1a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "1.5rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Noto Serif"],
+                    "body": ["Manrope"],
+                    "label": ["Manrope"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .editorial-shadow {
+            box-shadow: 0 40px 80px -20px rgba(28, 28, 25, 0.08);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface antialiased">
+<header class="fixed top-0 w-full z-50 bg-stone-50/80 dark:bg-stone-900/80 backdrop-blur-xl shadow-sm dark:shadow-none">
+<div class="flex justify-between items-center px-6 py-4 max-w-screen-2xl mx-auto">
+<div class="text-2xl font-serif italic text-orange-900 dark:text-orange-200">The Editorial Bistro</div>
+<div class="hidden md:flex items-center gap-8">
+<nav class="flex gap-6">
+<a class="text-orange-900 dark:text-orange-200 border-b-2 border-orange-900 pb-1 font-medium" href="#">Table 12</a>
+<a class="text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors" href="#">Active Session</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-stone-100/50 dark:hover:bg-stone-800/50 transition-all duration-300 rounded-full scale-95 duration-200 ease-in-out">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+</div>
+</div>
+</header>
+<main class="min-h-screen pt-20 pb-24 md:pb-0">
+<section class="relative w-full min-h-[921px] flex flex-col items-center justify-center overflow-hidden px-6">
+<div class="absolute inset-0 z-0">
+<img alt="Premium Cafe Interior" class="w-full h-full object-cover brightness-[0.85]" data-alt="Luxurious minimalist cafe interior with high ceilings, warm wooden textures, marble tabletops, and soft sunlight streaming through large windows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZnjHpjl28ivPu9v3MEHU0j3JHkg9tDRTaETxwcUbDLyrw_Wgwun4MqhF6SmKxiBZ2Ag1BTK-zB_7mKfdYb28P0Fro_sBRxt0lojf5vkor92sqsbyNOWysEW-4r3z6GIaYSiGDAv_B1VRbKSPVou4sGzZivJneiQKboFCsGWB_HCZSLRpedo_ScaqKpi2tZWI_BQdUgKyfympw8s4EJj4LUkaca_A9dMOdz4YBOvZRbeVtMrlKq8MbF_36ZaXxDPpRFgqq15nUrpHc"/>
+<div class="absolute inset-0 bg-gradient-to-b from-stone-900/40 via-transparent to-surface"></div>
+</div>
+<div class="relative z-10 max-w-4xl w-full text-center space-y-12">
+<div class="space-y-4">
+<span class="inline-block px-4 py-1.5 rounded-full bg-tertiary text-on-tertiary text-[10px] uppercase tracking-widest font-bold font-label">
+                        Guest Experience
+                    </span>
+<h1 class="font-headline text-5xl md:text-7xl lg:text-8xl text-stone-900 tracking-tight leading-tight">
+                        Welcome to <br/> <span class="italic font-serif">The Editorial Bistro</span>
+</h1>
+</div>
+<div class="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 pt-8">
+<div class="text-left md:border-r border-stone-300/30 pr-0 md:pr-16">
+<p class="font-label text-[10px] uppercase tracking-widest text-stone-500 mb-2 font-bold">Current Location</p>
+<p class="font-headline text-3xl text-primary leading-none italic">Table 12</p>
+</div>
+<div class="text-left">
+<p class="font-label text-[10px] uppercase tracking-widest text-stone-500 mb-2 font-bold">Service Mode</p>
+<p class="font-headline text-3xl text-stone-800 leading-none">Premium Roast Selection</p>
+</div>
+</div>
+<div class="pt-10 flex flex-col items-center gap-6">
+<button class="group relative inline-flex items-center justify-center px-10 py-5 bg-gradient-to-r from-primary to-primary-container text-on-primary rounded-xl font-bold tracking-wide text-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 overflow-hidden">
+<span class="relative z-10 flex items-center gap-3">
+                            Start Ordering
+                            <span class="material-symbols-outlined">arrow_forward</span>
+</span>
+<div class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</button>
+<p class="text-stone-500 text-sm italic font-serif">
+                        Your digital sommelier is ready to guide you.
+                    </p>
+</div>
+</div>
+<div class="absolute bottom-12 right-12 hidden lg:flex items-center gap-4 animate-bounce">
+<p class="text-[10px] uppercase tracking-widest text-stone-500 font-bold vertical-text">Scroll to explore menu</p>
+<div class="w-[1px] h-12 bg-stone-300/50"></div>
+</div>
+</section>
+<section class="max-w-screen-2xl mx-auto px-6 py-24 grid grid-cols-1 md:grid-cols-12 gap-12">
+<div class="md:col-span-5 space-y-8">
+<div class="bg-surface-container-low p-10 rounded-xl editorial-shadow">
+<h2 class="font-headline text-3xl text-stone-900 mb-6 italic">Today's Signature</h2>
+<div class="aspect-[4/5] rounded-lg overflow-hidden mb-8">
+<img alt="Signature Latte" class="w-full h-full object-cover" data-alt="Close-up of a perfectly poured latte with intricate heart-shaped latte art in a ceramic artisanal cup on a stone coaster" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBX9gxOrF4NtJ4vzRUwh8F8Qe43MdLqVBXof7D6n0ICiC4VzYyHtAwQ4grgXYUdPGR9w4rhKsbvWOlF357RNte_kzJi1soCjXtYYMl4Tuw5HMdcj8d3623Ah_AjqWKtomqG4VvQZYMq4KaYG6mXsJ9AmkSlRQYjP0OMAfIU6Nszul78un5P5j7sqJE0XG_82xxQCGcq0PTCpXuNUlKvg4xuOEjaGiixdBp22qkGM3Yvk0QxazWlyJadMxFzGILZiuizZXNFH8GZf1Ml"/>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between items-end">
+<div>
+<p class="font-label text-[10px] uppercase tracking-widest text-primary font-bold mb-1">House Roast</p>
+<h3 class="font-headline text-2xl text-stone-900">Velvet Ethiopian Gold</h3>
+</div>
+<span class="font-headline text-xl text-stone-800">$8.50</span>
+</div>
+<p class="text-stone-600 text-sm leading-relaxed">
+                            A complex medium-bodied roast featuring delicate notes of jasmine, apricot, and a lingering honey finish. Brewed with precision for Table 12.
+                        </p>
+</div>
+</div>
+</div>
+<div class="md:col-span-7 flex flex-col justify-center space-y-16">
+<div class="max-w-xl">
+<h2 class="font-headline text-4xl md:text-5xl text-stone-900 leading-tight mb-8">
+                        Artisanally crafted, <br/> <span class="italic font-serif">thoughtfully served.</span>
+</h2>
+<p class="text-stone-600 text-lg leading-relaxed mb-10">
+                        At The Editorial Bistro, we believe coffee is more than a beverage—it's a narrative. Each bean tells a story of its origin, and each cup is a chapter in our pursuit of sensory excellence.
+                    </p>
+<div class="grid grid-cols-2 gap-12 border-t border-stone-200/50 pt-12">
+<div>
+<span class="material-symbols-outlined text-primary mb-4" style="font-size: 32px;">coffee</span>
+<h4 class="font-headline text-xl text-stone-900 mb-2">Ethical Sourcing</h4>
+<p class="text-stone-500 text-sm">Direct trade relationships with farmers in Ethiopia and Colombia.</p>
+</div>
+<div>
+<span class="material-symbols-outlined text-primary mb-4" style="font-size: 32px;">timer</span>
+<h4 class="font-headline text-xl text-stone-900 mb-2">Small Batch</h4>
+<p class="text-stone-500 text-sm">Roasted daily in-house to preserve volatile aromatic compounds.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-safe h-20 bg-stone-50/90 dark:bg-stone-900/90 backdrop-blur-xl border-t border-stone-200/30 dark:border-stone-800/30 shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
+<a class="flex flex-col items-center justify-center bg-orange-900 dark:bg-orange-200 text-white dark:text-stone-900 rounded-full w-14 h-14 -mt-6 shadow-lg cubic-bezier(0.4, 0, 0.2, 1) duration-400" href="#">
+<span class="material-symbols-outlined" data-icon="restaurant_menu">restaurant_menu</span>
+<span class="text-[10px] uppercase tracking-widest font-semibold font-sans hidden">Menu</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 p-2 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="star">star</span>
+<span class="text-[10px] uppercase tracking-widest font-semibold font-sans">Favorites</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 p-2 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+<span class="text-[10px] uppercase tracking-widest font-semibold font-sans">Orders</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 p-2 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+<span class="text-[10px] uppercase tracking-widest font-semibold font-sans">Cart</span>
+</a>
+</nav>
+<aside class="fixed left-0 top-0 h-full w-64 z-40 hidden lg:flex flex-col p-4 bg-stone-50 dark:bg-stone-950 border-r border-stone-200 dark:border-stone-800 transition-transform duration-300 ease-in-out">
+<div class="mb-10 px-4 py-6">
+<div class="text-xl font-serif text-orange-900 dark:text-orange-200 mb-6">The Editorial Bistro</div>
+<div class="flex items-center gap-3 bg-stone-100 dark:bg-stone-900 p-3 rounded-lg">
+<div class="w-10 h-10 rounded-full bg-stone-200 flex items-center justify-center overflow-hidden">
+<img alt="Cafe Logo" class="w-full h-full object-cover" data-alt="Minimalist emblem of a coffee bean and an open book" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjYpb2nIJ-8z9HZhtIFR4xzW7qvWzb1FQSqnxclQ78Ck-9paIAm47pTeHzgXvrkbLMTHz4EXAClS959eLHWJMi3HyhIJa2FaqKjRVs2XEeE2PpJvJEOrCUzUi47y3HiFJM-YE97b_A-pLmWjO1k7p4k_4m956fB9Byk7CO7neoV_a-cF6cXOYRVmuR1k2ExDMF1BqoXBxQWJjWErs-TsPneVVz1tQ5ZjY4fq8mTtv_RkilZEnMLwSvyIicFtVhlfcMnC50sAPVg68q"/>
+</div>
+<div>
+<p class="text-xs font-bold uppercase tracking-tight text-stone-900 dark:text-stone-100">Table 12</p>
+<p class="text-[10px] text-stone-500">Premium Roast</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-4 px-4 py-3 text-stone-600 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-900 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-serif">The Menu</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-stone-600 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-900 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="coffee">coffee</span>
+<span class="font-serif">Our Roasts</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-stone-600 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-900 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span class="font-serif">Order History</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-stone-600 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-900 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+<span class="font-serif">Help</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-stone-600 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-900 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-serif">Settings</span>
+</a>
+</nav>
+<div class="mt-auto px-4 pb-6">
+<button class="w-full py-3 bg-primary text-on-primary rounded-lg font-bold text-sm tracking-wide shadow-lg hover:shadow-xl transition-all">
+                View Cart
+            </button>
+</div>
+</aside>
+</body></html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Editorial Bistro - Order Success</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@400;500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-container": "#606657",
+                        "on-surface-variant": "#514440",
+                        "on-background": "#1c1c19",
+                        "on-primary-fixed-variant": "#673b2e",
+                        "on-secondary-fixed": "#181d12",
+                        "inverse-primary": "#f6b8a6",
+                        "on-primary-container": "#fffbff",
+                        "secondary": "#5a6052",
+                        "surface-container": "#f0ede9",
+                        "surface-container-low": "#f6f3ee",
+                        "surface": "#fcf9f4",
+                        "surface-bright": "#fcf9f4",
+                        "primary": "#7f5041",
+                        "on-primary": "#ffffff",
+                        "surface-dim": "#dcdad5",
+                        "on-primary-fixed": "#331207",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "surface-container-highest": "#e5e2dd",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#ffdbd0",
+                        "on-error": "#ffffff",
+                        "primary-container": "#9b6858",
+                        "tertiary-container": "#4f7d76",
+                        "on-tertiary-container": "#f4fffc",
+                        "secondary-fixed-dim": "#c3c9b7",
+                        "tertiary-fixed-dim": "#a0d0c8",
+                        "outline": "#84746f",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed": "#bbece4",
+                        "on-tertiary-fixed": "#00201d",
+                        "on-surface": "#1c1c19",
+                        "primary-fixed-dim": "#f6b8a6",
+                        "inverse-surface": "#31302d",
+                        "secondary-container": "#dfe5d2",
+                        "background": "#fcf9f4",
+                        "outline-variant": "#d6c2bd",
+                        "surface-container-high": "#ebe8e3",
+                        "on-secondary-fixed-variant": "#43493b",
+                        "surface-tint": "#825244",
+                        "surface-variant": "#e5e2dd",
+                        "on-tertiary-fixed-variant": "#1f4e48",
+                        "tertiary": "#36645d",
+                        "inverse-on-surface": "#f3f0eb",
+                        "secondary-fixed": "#dfe5d2",
+                        "error": "#ba1a1a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Noto Serif"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .tonal-shift {
+            background-color: #f0ede9;
+        }
+        @media (prefers-color-scheme: dark) {
+            .tonal-shift {
+                background-color: #1c1c19;
+            }
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary/20">
+<!-- TopNavBar (Shared Component) -->
+<!-- Suppressed on Success/Confirmation screens to focus on the message -->
+<main class="min-h-screen flex items-center justify-center p-6 bg-surface">
+<!-- Success Canvas -->
+<div class="max-w-xl w-full flex flex-col items-center text-center">
+<!-- Hero Iconography -->
+<div class="relative mb-12">
+<div class="absolute inset-0 bg-secondary/10 rounded-full scale-150 blur-2xl"></div>
+<div class="relative w-32 h-32 bg-secondary flex items-center justify-center rounded-full shadow-2xl shadow-secondary/20">
+<span class="material-symbols-outlined text-white text-5xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<!-- Header Section -->
+<div class="space-y-4 mb-12">
+<h1 class="font-headline text-5xl md:text-6xl text-on-surface tracking-tight leading-tight">Order Placed!</h1>
+<p class="font-body text-xl text-on-surface-variant font-light max-w-md mx-auto">
+                    Order #4202 is being prepared for Table 12
+                </p>
+</div>
+<!-- Status Card: Bento Inspired Asymmetry -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full mb-12">
+<!-- Time Block -->
+<div class="bg-surface-container-low p-8 rounded-xl flex flex-col items-start justify-between text-left">
+<span class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant opacity-60 mb-8">Estimated Wait</span>
+<div>
+<span class="font-headline text-5xl text-primary leading-none">12-15</span>
+<span class="font-label text-sm uppercase tracking-widest text-primary block mt-2">Minutes</span>
+</div>
+</div>
+<!-- Coffee Detail Block -->
+<div class="bg-surface-container-highest p-8 rounded-xl flex flex-col justify-between text-left relative overflow-hidden group">
+<img alt="Detailed shot of espresso preparation" class="absolute inset-0 w-full h-full object-cover opacity-10 group-hover:scale-105 transition-transform duration-700" data-alt="Close-up of a professional barista preparing a specialty coffee with rich crema and soft morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCY9ZNuv4_cb5RA5Xx5WqLvAL45hNOV-rmDNcLb-2Enxm-tkPws55rTWJBPueAax5iBxArP9sTCiC0F-_gG4KQZvmKWqW_3_GZNJdT6PTycZejbm_36WiT8NTDkAz2XCZMb79fOJuGejzy32Mv6K6an9dWCVLXEgdshW8tCBtHn2V0DzzDgoyIP0Axc2vxNNIAjn3Ao01UAJrtXyBZrIvtfLmBRKaf7W6mvX0s5fztd59CBUyFaHLNDtEPaeDXJlaqkCQZPpyFnyOQl"/>
+<span class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant opacity-60 mb-8 relative z-10">Current Roast</span>
+<div class="relative z-10">
+<p class="font-headline text-xl text-on-surface italic">Premium Ethiopian Yirgacheffe</p>
+<p class="font-body text-xs text-on-surface-variant mt-2">Light roast with floral notes</p>
+</div>
+</div>
+</div>
+<!-- Order Breakdown Minimalist -->
+<div class="w-full bg-surface-container-low rounded-xl p-8 mb-12 text-left">
+<h3 class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-6">Your Selection</h3>
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<div>
+<p class="font-body font-semibold text-on-surface">1 × Oat Milk Flat White</p>
+<p class="font-body text-xs text-on-surface-variant">Extra hot, double shot</p>
+</div>
+<span class="font-body text-on-surface">$5.50</span>
+</div>
+<div class="flex justify-between items-center">
+<div>
+<p class="font-body font-semibold text-on-surface">1 × Almond Croissant</p>
+<p class="font-body text-xs text-on-surface-variant">Toasted</p>
+</div>
+<span class="font-body text-on-surface">$4.75</span>
+</div>
+</div>
+</div>
+<!-- Action Area -->
+<div class="flex flex-col sm:flex-row gap-4 w-full justify-center items-center">
+<button class="w-full sm:w-auto px-12 py-5 bg-gradient-to-tr from-primary to-primary-container text-on-primary font-body font-semibold rounded-xl shadow-lg shadow-primary/20 hover:scale-[1.02] transition-all duration-300 active:scale-95">
+                    Keep Browsing
+                </button>
+<button class="w-full sm:w-auto px-12 py-5 text-primary font-body font-semibold border-b border-transparent hover:border-primary transition-all duration-300">
+                    Track in Orders
+                </button>
+</div>
+<p class="mt-12 font-body text-xs text-on-surface-variant/40 tracking-wider">
+                Thank you for choosing The Editorial Bistro.
+            </p>
+</div>
+</main>
+<!-- Bottom Navigation Shell (Shared Component) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-safe h-20 bg-stone-50/90 dark:bg-stone-900/90 backdrop-blur-xl border-t border-stone-200/30 dark:border-stone-800/30 md:hidden shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
+<div class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 p-2 active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-2xl" data-icon="restaurant_menu">restaurant_menu</span>
+<span class="font-sans text-[10px] uppercase tracking-widest font-semibold mt-1">Menu</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 p-2 active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-2xl" data-icon="star">star</span>
+<span class="font-sans text-[10px] uppercase tracking-widest font-semibold mt-1">Favorites</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-orange-900 dark:bg-orange-200 text-white dark:text-stone-900 rounded-full w-14 h-14 -mt-6 shadow-lg active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-2xl" data-icon="shopping_bag">shopping_bag</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 p-2 active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-2xl" data-icon="shopping_cart">shopping_cart</span>
+<span class="font-sans text-[10px] uppercase tracking-widest font-semibold mt-1">Cart</span>
+</div>
+</nav>
+<!-- SideNav for Large Screens -->
+<aside class="fixed left-0 top-0 h-full w-64 z-40 hidden lg:flex flex-col p-4 bg-stone-50 dark:bg-stone-950 border-r border-stone-200 dark:border-stone-800 shadow-xl">
+<div class="mb-10 px-4">
+<h2 class="text-xl font-serif text-orange-900 dark:text-orange-200">The Editorial Bistro</h2>
+<p class="text-xs font-serif text-stone-500 mt-1">Table 12 • Premium Roast</p>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 text-stone-600 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-900 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-serif">The Menu</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-600 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-900 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="coffee">coffee</span>
+<span class="font-serif">Our Roasts</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-stone-200/50 dark:bg-stone-800/50 text-orange-900 dark:text-orange-200 font-medium rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span class="font-serif">Order History</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-600 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-900 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+<span class="font-serif">Help</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-600 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-900 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-serif">Settings</span>
+</a>
+</nav>
+<button class="mt-auto bg-orange-900 text-white p-4 rounded-xl font-serif text-center hover:opacity-90 transition-opacity">
+            View Cart
+        </button>
+</aside>
+</body></html>

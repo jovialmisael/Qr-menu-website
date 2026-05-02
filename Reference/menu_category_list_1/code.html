@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Editorial Bistro - Pasta Menu</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Manrope', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        h1, h2, h3, .font-serif {
+            font-family: 'Noto Serif', serif;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-container": "#606657",
+                    "on-surface-variant": "#514440",
+                    "on-background": "#1c1c19",
+                    "on-primary-fixed-variant": "#673b2e",
+                    "on-secondary-fixed": "#181d12",
+                    "inverse-primary": "#f6b8a6",
+                    "on-primary-container": "#fffbff",
+                    "secondary": "#5a6052",
+                    "surface-container": "#f0ede9",
+                    "surface-container-low": "#f6f3ee",
+                    "surface": "#fcf9f4",
+                    "surface-bright": "#fcf9f4",
+                    "primary": "#7f5041",
+                    "on-primary": "#ffffff",
+                    "surface-dim": "#dcdad5",
+                    "on-primary-fixed": "#331207",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "surface-container-highest": "#e5e2dd",
+                    "on-error-container": "#93000a",
+                    "primary-fixed": "#ffdbd0",
+                    "on-error": "#ffffff",
+                    "primary-container": "#9b6858",
+                    "tertiary-container": "#4f7d76",
+                    "on-tertiary-container": "#f4fffc",
+                    "secondary-fixed-dim": "#c3c9b7",
+                    "tertiary-fixed-dim": "#a0d0c8",
+                    "outline": "#84746f",
+                    "error-container": "#ffdad6",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-fixed": "#bbece4",
+                    "on-tertiary-fixed": "#00201d",
+                    "on-surface": "#1c1c19",
+                    "primary-fixed-dim": "#f6b8a6",
+                    "inverse-surface": "#31302d",
+                    "secondary-container": "#dfe5d2",
+                    "background": "#fcf9f4",
+                    "outline-variant": "#d6c2bd",
+                    "surface-container-high": "#ebe8e3",
+                    "on-secondary-fixed-variant": "#43493b",
+                    "surface-tint": "#825244",
+                    "surface-variant": "#e5e2dd",
+                    "on-tertiary-fixed-variant": "#1f4e48",
+                    "tertiary": "#36645d",
+                    "inverse-on-surface": "#f3f0eb",
+                    "secondary-fixed": "#dfe5d2",
+                    "error": "#ba1a1a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Noto Serif"],
+                    "body": ["Manrope"],
+                    "label": ["Manrope"]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- Desktop Side Navigation -->
+<nav class="fixed left-0 top-0 h-full w-64 z-40 hidden lg:flex flex-col p-4 bg-stone-50 dark:bg-stone-950 border-r border-stone-200 dark:border-stone-800">
+<div class="mb-8 px-2">
+<h1 class="text-xl font-serif text-orange-900 dark:text-orange-200">The Editorial Bistro</h1>
+<p class="text-xs font-label text-stone-500 mt-1">Table 12 • Premium Roast Selection</p>
+</div>
+<div class="space-y-1 flex-1">
+<a class="flex items-center gap-3 px-4 py-3 bg-stone-200/50 dark:bg-stone-800/50 text-orange-900 dark:text-orange-200 font-medium rounded-lg transition-all duration-300" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span>The Menu</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-600 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-900 transition-all" href="#">
+<span class="material-symbols-outlined">coffee</span>
+<span>Our Roasts</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-600 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-900 transition-all" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span>Order History</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-600 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-900 transition-all" href="#">
+<span class="material-symbols-outlined">help_outline</span>
+<span>Help</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-600 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-900 transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+</div>
+<button class="mt-auto w-full py-4 px-6 bg-primary text-on-primary rounded-xl font-semibold flex justify-between items-center shadow-lg hover:opacity-90 transition-opacity">
+<span>View Cart</span>
+<span class="text-sm">3 Items</span>
+</button>
+</nav>
+<!-- Mobile Top Bar -->
+<header class="fixed top-0 w-full z-50 bg-stone-50/80 dark:bg-stone-900/80 backdrop-blur-xl shadow-sm lg:hidden">
+<div class="flex justify-between items-center px-6 py-4">
+<span class="text-2xl font-serif italic text-orange-900 dark:text-orange-200">The Editorial Bistro</span>
+<div class="flex items-center gap-4">
+<span class="text-xs font-label uppercase tracking-widest text-orange-900">Table 12</span>
+<span class="material-symbols-outlined text-stone-900">shopping_bag</span>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="lg:ml-64 pt-20 lg:pt-0 min-h-screen pb-24 lg:pb-12">
+<!-- Hero Category Section -->
+<div class="px-6 py-8 lg:px-12 lg:py-16 max-w-7xl mx-auto">
+<header class="mb-12">
+<div class="flex items-center gap-2 text-primary font-label text-xs uppercase tracking-[0.2em] mb-4">
+<span>The Menu</span>
+<span class="material-symbols-outlined text-[10px]">chevron_right</span>
+<span>Pasta Selection</span>
+</div>
+<h2 class="text-5xl lg:text-7xl font-serif text-on-background tracking-tighter leading-none mb-6">Hand-Rolled &amp; <br/><span class="italic">House-Dried Pasta</span></h2>
+<p class="text-on-surface-variant max-w-xl text-lg font-light leading-relaxed">
+                    Our pasta is crafted daily in the bistro using heritage grains and organic yolks, drawing inspiration from regional Italian traditions with a contemporary editorial touch.
+                </p>
+</header>
+<!-- Pasta Grid - Editorial Layout -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-8 gap-y-16">
+<!-- Pasta Item 1 -->
+<article class="group relative flex flex-col">
+<div class="relative aspect-[4/5] overflow-hidden rounded-xl bg-surface-container-low mb-6">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="overhead shot of a bowl of artisanal tagliatelle pasta with golden egg yolks and fresh herbs on a rustic ceramic plate" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBh1n6wa3tsVL1uvHa35CSktnJsMPhfunRyKL1lXz_4V4_ZI3-dIF7pcYIxDtafSPkLGjp3bHkqyiIAqKKRlquI4AT3hA10mq-206jnPuJOXELHAUgJ66qE3QbvMHigQ1R3G3EODrR2s_PK4IcisesuDkZOHOJtLRdMGJ055wa_KPPH9KjLzAyD1VYAAgwg2GFnojZz7Ca493Eq_q7qR3h4Khtcqgec6wu2V1vrOvSYZ8kb2lexxZlrWDDEWyokKfNUxKh0_cLTKQis"/>
+<div class="absolute top-4 left-4">
+<span class="px-3 py-1 bg-tertiary text-on-tertiary text-[10px] font-label font-bold uppercase tracking-wider rounded-full shadow-sm">Popular</span>
+</div>
+</div>
+<div class="flex justify-between items-start">
+<div class="pr-4">
+<h3 class="text-2xl font-serif mb-1 group-hover:text-primary transition-colors">Golden Tagliatelle</h3>
+<p class="text-sm text-on-surface-variant font-light line-clamp-2 mb-4">Slow-cooked organic egg yolk emulsion, black pepper, and 36-month aged Parmigiano Reggiano.</p>
+<span class="text-lg font-medium text-on-surface">$24.00</span>
+</div>
+<button class="w-12 h-12 rounded-full border border-outline-variant/30 flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition-all duration-300">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</article>
+<!-- Pasta Item 2 -->
+<article class="group relative flex flex-col xl:translate-y-12">
+<div class="relative aspect-[4/5] overflow-hidden rounded-xl bg-surface-container-low mb-6">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="close up of rigatoni pasta with a rich red tomato sauce and fresh basil leaves on a white linen tablecloth" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUVdLPnJxmSHAFvdpMsM2QZmq599xU_3-2WTTQN6mTyAXIgDfxc-qRFOpVWGmMevFVe9kX4ARttSLkOqtFhe5NHoh3XO4xhPeFU-UrF2ga4vAisnrHcGWEYYR6zfOTZ1bLkg8BZ09BvMvsEIkEVIR6rRVB3un8PIm9yk21kixy4HFDyinTZAHgQrIgJpcaC3qcRj2LlRepmm8KenwCokOUkGe1JVYs33WaoBfPrOddoOQ3eaa-bCbN1smYLTSDdtp4SSf1WRd4wRGO"/>
+<div class="absolute top-4 left-4">
+<span class="px-3 py-1 bg-primary-container text-on-primary-container text-[10px] font-label font-bold uppercase tracking-wider rounded-full shadow-sm">Chef's Choice</span>
+</div>
+</div>
+<div class="flex justify-between items-start">
+<div class="pr-4">
+<h3 class="text-2xl font-serif mb-1 group-hover:text-primary transition-colors">Tuscan Rigatoni</h3>
+<p class="text-sm text-on-surface-variant font-light line-clamp-2 mb-4">Heritage tomato reduction, hand-torn basil, and smoked burrata heart from Puglia.</p>
+<span class="text-lg font-medium text-on-surface">$22.00</span>
+</div>
+<button class="w-12 h-12 rounded-full border border-outline-variant/30 flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition-all duration-300">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</article>
+<!-- Pasta Item 3 -->
+<article class="group relative flex flex-col">
+<div class="relative aspect-[4/5] overflow-hidden rounded-xl bg-surface-container-low mb-6">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="artistic shot of black squid ink pasta with seared scallops and a light lemon zest on a dark stone plate" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPOdWWesLwgdq1ZZzuMdrUL9fiLTVldl3GQAjJq2Lrdb8SVlZboeKIXi8pFVmuuCQ0aJTVl9LE9mhvPVZKd4JYPKddxiN5ELcwnV02slIzrKWC8DR8T0GeteatG6_NoROSyL27oPdiSOpzqqlsDME6zy3dQcOM3_ssApTTpsUHxdr1HURJn-qkFgrjsZA_N4X3-MW-Xs9iGqBbcelAROFTT1ep4umH4YhwBi3YqTKxMXR2Mpfu1UkUjZF_0kygRAhgWXwhlbxo-7vr"/>
+<div class="absolute top-4 left-4">
+<span class="px-3 py-1 bg-secondary text-on-secondary text-[10px] font-label font-bold uppercase tracking-wider rounded-full shadow-sm">New</span>
+</div>
+</div>
+<div class="flex justify-between items-start">
+<div class="pr-4">
+<h3 class="text-2xl font-serif mb-1 group-hover:text-primary transition-colors">Ink Linguine</h3>
+<p class="text-sm text-on-surface-variant font-light line-clamp-2 mb-4">Wild-caught squid ink linguine, diver scallops, and a preserved lemon herb butter.</p>
+<span class="text-lg font-medium text-on-surface">$29.00</span>
+</div>
+<button class="w-12 h-12 rounded-full border border-outline-variant/30 flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition-all duration-300">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</article>
+<!-- Pasta Item 4 -->
+<article class="group relative flex flex-col">
+<div class="relative aspect-[4/5] overflow-hidden rounded-xl bg-surface-container-low mb-6">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="plate of fresh orecchiette pasta with broccoli rabe and toasted garlic chips in a warm sunny cafe setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOb-EtyYr9khr7Cxry10hZqdNZTKWIqSefx0fwhVY15qC9-ltCu2Hsgo3R9ziBunn_7-spDj77N8p5F1zXLyww5ZgOBi8hnf_A9TMhtB--7TfQ3jGYGkH2bZYVOSMdtEuKEq1SioGE3aY-dd9XQk2LNUz_vTy9Ta9uT8BT6CzS23mho7c8t1oETIpKXD2EWdK8O48R5u00ivCPuG5bOh7wqLVXnpvBtlc1YEIMh_bHecbl1k5aDzSBCPSptsxJOa-fXJrvh2uZcrXl"/>
+</div>
+<div class="flex justify-between items-start">
+<div class="pr-4">
+<h3 class="text-2xl font-serif mb-1 group-hover:text-primary transition-colors">Orecchiette Pugliese</h3>
+<p class="text-sm text-on-surface-variant font-light line-clamp-2 mb-4">Broccoli rabe, toasted garlic crumbs, and a touch of Calabria chili oil.</p>
+<span class="text-lg font-medium text-on-surface">$19.00</span>
+</div>
+<button class="w-12 h-12 rounded-full border border-outline-variant/30 flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition-all duration-300">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</article>
+<!-- Pasta Item 5 -->
+<article class="group relative flex flex-col xl:translate-y-12">
+<div class="relative aspect-[4/5] overflow-hidden rounded-xl bg-surface-container-low mb-6">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="delicious pappardelle pasta with a hearty wild mushroom ragu and fresh parsley on a refined bistro plate" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnZBVn1hEHPDl49k30bWQWNIXhl3MB558Vq6iPKKinrswOLSlDZLS0xv7lU7v8DjsXbirebx5qtjW7-rCZMv3CEnWGjxh-hKZyq9sWglS6MDoJ5gR39d7FInUEx9_bH6QM76mYwU_6ZEdqZ5RcBOKKdH1ZwcQIju239ioyLXek5kVGx30yxwGcgMijwcwQkAHXnqEOCMNujWEUSpKV-FfMUubbgkuK5jwGlAkrNkyTtp8pcMHBYIE1hwhXGRucHfJc25w_8KFvdZhL"/>
+<div class="absolute top-4 left-4">
+<span class="px-3 py-1 bg-stone-800 text-stone-100 text-[10px] font-label font-bold uppercase tracking-wider rounded-full shadow-sm">House Classic</span>
+</div>
+</div>
+<div class="flex justify-between items-start">
+<div class="pr-4">
+<h3 class="text-2xl font-serif mb-1 group-hover:text-primary transition-colors">Wild Mushroom Ragù</h3>
+<p class="text-sm text-on-surface-variant font-light line-clamp-2 mb-4">Porcini and chanterelle emulsion with hand-torn wide ribbon pappardelle.</p>
+<span class="text-lg font-medium text-on-surface">$26.00</span>
+</div>
+<button class="w-12 h-12 rounded-full border border-outline-variant/30 flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition-all duration-300">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</article>
+<!-- Pasta Item 6 -->
+<article class="group relative flex flex-col">
+<div class="relative aspect-[4/5] overflow-hidden rounded-xl bg-surface-container-low mb-6">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="gourmet lobster ravioli with a saffron cream sauce and microgreens on a light ceramic bowl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQ5AlPiykG1S7vVmImEG33RgGagn7sWUU5I9BhFLcHbl_AHL3IvjOBvW7nszWfKh9gxqMIuCNobDE_TX0m-v2YL2mBoJwbYBC_jH_H2FtPzU5bm4eRtI4muLe22Ls7Q5-ntbXfXOZz2u44aY5FHgqifKmCqsaX_-Kjcw8nzxWuI2Nxfok6PGrVeML1FlU8BRXAgAejOWaEvqBSMWfdO-kczGFBQqJwBTlrB0EuX-3ZiWWGJrS4mjVsWsN0mU-GDkA9qMGlYLWAaYVa"/>
+<div class="absolute top-4 left-4">
+<span class="px-3 py-1 bg-secondary text-on-secondary text-[10px] font-label font-bold uppercase tracking-wider rounded-full shadow-sm">New</span>
+</div>
+</div>
+<div class="flex justify-between items-start">
+<div class="pr-4">
+<h3 class="text-2xl font-serif mb-1 group-hover:text-primary transition-colors">Lobster Ravioli</h3>
+<p class="text-sm text-on-surface-variant font-light line-clamp-2 mb-4">Maine lobster filling, saffron-infused butter, and sea urchin foam finish.</p>
+<span class="text-lg font-medium text-on-surface">$34.00</span>
+</div>
+<button class="w-12 h-12 rounded-full border border-outline-variant/30 flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition-all duration-300">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</article>
+</div>
+</div>
+</main>
+<!-- Mobile Bottom Navigation -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-safe h-20 bg-stone-50/90 dark:bg-stone-900/90 backdrop-blur-xl border-t border-stone-200/30 dark:border-stone-800/30 shadow-[0_-4px_20px_rgba(0,0,0,0.05)] lg:hidden">
+<a class="flex flex-col items-center justify-center bg-orange-900 dark:bg-orange-200 text-white dark:text-stone-900 rounded-full w-14 h-14 -mt-6 shadow-lg" href="#">
+<span class="material-symbols-outlined">restaurant_menu</span>
+<span class="text-[8px] uppercase font-bold">Menu</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 p-2" href="#">
+<span class="material-symbols-outlined">star</span>
+<span class="text-[10px] uppercase font-semibold">Favorites</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 p-2" href="#">
+<span class="material-symbols-outlined">shopping_bag</span>
+<span class="text-[10px] uppercase font-semibold">Orders</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 p-2" href="#">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="text-[10px] uppercase font-semibold">Cart</span>
+</a>
+</nav>
+</body></html>

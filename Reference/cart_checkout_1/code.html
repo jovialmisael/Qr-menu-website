@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Checkout Review - The Editorial Bistro</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-container": "#606657",
+                        "on-surface-variant": "#514440",
+                        "on-background": "#1c1c19",
+                        "on-primary-fixed-variant": "#673b2e",
+                        "on-secondary-fixed": "#181d12",
+                        "inverse-primary": "#f6b8a6",
+                        "on-primary-container": "#fffbff",
+                        "secondary": "#5a6052",
+                        "surface-container": "#f0ede9",
+                        "surface-container-low": "#f6f3ee",
+                        "surface": "#fcf9f4",
+                        "surface-bright": "#fcf9f4",
+                        "primary": "#7f5041",
+                        "on-primary": "#ffffff",
+                        "surface-dim": "#dcdad5",
+                        "on-primary-fixed": "#331207",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "surface-container-highest": "#e5e2dd",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#ffdbd0",
+                        "on-error": "#ffffff",
+                        "primary-container": "#9b6858",
+                        "tertiary-container": "#4f7d76",
+                        "on-tertiary-container": "#f4fffc",
+                        "secondary-fixed-dim": "#c3c9b7",
+                        "tertiary-fixed-dim": "#a0d0c8",
+                        "outline": "#84746f",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed": "#bbece4",
+                        "on-tertiary-fixed": "#00201d",
+                        "on-surface": "#1c1c19",
+                        "primary-fixed-dim": "#f6b8a6",
+                        "inverse-surface": "#31302d",
+                        "secondary-container": "#dfe5d2",
+                        "background": "#fcf9f4",
+                        "outline-variant": "#d6c2bd",
+                        "surface-container-high": "#ebe8e3",
+                        "on-secondary-fixed-variant": "#43493b",
+                        "surface-tint": "#825244",
+                        "surface-variant": "#e5e2dd",
+                        "on-tertiary-fixed-variant": "#1f4e48",
+                        "tertiary": "#36645d",
+                        "inverse-on-surface": "#f3f0eb",
+                        "secondary-fixed": "#dfe5d2",
+                        "error": "#ba1a1a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Noto Serif"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+        h1, h2, h3 { font-family: 'Noto Serif', serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #d6c2bd; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-surface text-on-background min-h-screen">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-stone-50/80 dark:bg-stone-900/80 backdrop-blur-xl shadow-sm dark:shadow-none">
+<div class="flex justify-between items-center px-6 py-4 max-w-screen-2xl mx-auto">
+<div class="text-2xl font-serif italic text-orange-900 dark:text-orange-200">The Editorial Bistro</div>
+<div class="hidden md:flex items-center space-x-8">
+<a class="text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors font-serif" href="#">The Menu</a>
+<a class="text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors font-serif" href="#">Our Roasts</a>
+<a class="text-orange-900 dark:text-orange-200 border-b-2 border-orange-900 pb-1 font-serif" href="#">Active Session</a>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden sm:flex flex-col text-right">
+<span class="text-xs uppercase tracking-widest font-bold text-primary">Table 12</span>
+<span class="text-[10px] text-stone-500">Bistro Floor</span>
+</div>
+<button class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center hover:bg-stone-100/50 transition-all">
+<span class="material-symbols-outlined text-stone-900">shopping_bag</span>
+</button>
+</div>
+</div>
+</nav>
+<main class="pt-28 pb-32 px-6 max-w-7xl mx-auto lg:grid lg:grid-cols-12 lg:gap-12">
+<!-- Left Column: Cart Items -->
+<div class="lg:col-span-7">
+<div class="flex items-baseline justify-between mb-8">
+<h1 class="text-4xl font-serif text-on-surface">Your Selection</h1>
+<span class="text-sm font-label uppercase tracking-widest text-outline">3 Items</span>
+</div>
+<div class="space-y-12">
+<!-- Item 1 -->
+<div class="flex gap-6 group">
+<div class="relative w-32 h-40 flex-shrink-0 overflow-hidden rounded-lg bg-surface-container-low">
+<img class="w-full h-full object-cover" data-alt="overhead shot of a ceramic cup of artisanal caffe latte with heart latte art on a marble table" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBY_tVcilNN0mi5TlxGI9MPHe1cfRFn9x9uFHc2pDq3ykvaCaACMifN5P95Ec_Zt1sMXDLnUhi4JGmNfeTrNOCPYbWco3xvex-bt-v9WnYEJRYxJWMDgt2ba9qZdQqhjn9Pe-Y0jvDfgFqVjvGwQ-m9BQxNxhmqJvPuxNJVc7LK8I3H6Tex7rhG8M_ZWZDHBZKlZfS36-HXxX3jasUKq3oqDBLdzpGN1OU1T51VwvEQUcnLolhFHqnICPZtsz-gujcEIFf5u4Egj7FG"/>
+</div>
+<div class="flex-grow flex flex-col justify-between py-1">
+<div>
+<div class="flex justify-between items-start">
+<h3 class="text-xl font-serif text-on-surface">Velvet Ethiopian Roast</h3>
+<span class="text-lg font-medium text-primary">$6.50</span>
+</div>
+<p class="text-sm text-on-surface-variant mt-1">Single origin, Oat milk, light cinnamon dusting.</p>
+<div class="mt-2 flex gap-2">
+<span class="px-2 py-0.5 bg-tertiary/10 text-tertiary text-[10px] font-bold rounded uppercase tracking-tighter">Vegan Friendly</span>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center bg-surface-container-high rounded-full px-1 py-1">
+<button class="w-8 h-8 rounded-full flex items-center justify-center hover:bg-surface-container-lowest transition-colors">
+<span class="material-symbols-outlined text-sm">remove</span>
+</button>
+<span class="w-8 text-center text-sm font-bold">1</span>
+<button class="w-8 h-8 rounded-full flex items-center justify-center hover:bg-surface-container-lowest transition-colors">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+</div>
+<button class="text-outline hover:text-error transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-lg">delete</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Remove</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex gap-6 group">
+<div class="relative w-32 h-40 flex-shrink-0 overflow-hidden rounded-lg bg-surface-container-low">
+<img class="w-full h-full object-cover" data-alt="close up of a flaky gourmet croissant with almond slivers on a minimalist beige plate" src="https://lh3.googleusercontent.com/aida-public/AB6AXuASbQ6VjzKm4CBzqyXLEMSBG_xWdvfj2vr_U-uqpPLeFvCCLCEdLpbqalFk4Q-3cYXUq5EvZpc1Vn7xb-1nVaCt3pUVE6gQXba1QCXnqycJs03ozHsC918KWuTkOhIu3bavwW3sj2-06UD_TM-xfdWoQGXobqFymG5twUtUsF-_yNIbBTOtvPVSH3NXZYqsG8fAXrgIJu32i3sSE_OjqRWi1ovHwRCs-qSblVWPsPkZ63SgpYo8iENnIMLOaYMU7QIKY_17sjzWD1mI"/>
+</div>
+<div class="flex-grow flex flex-col justify-between py-1">
+<div>
+<div class="flex justify-between items-start">
+<h3 class="text-xl font-serif text-on-surface">Twice-Baked Almond Croissant</h3>
+<span class="text-lg font-medium text-primary">$5.25</span>
+</div>
+<p class="text-sm text-on-surface-variant mt-1">Hand-laminated pastry with organic almond frangipane.</p>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center bg-surface-container-high rounded-full px-1 py-1">
+<button class="w-8 h-8 rounded-full flex items-center justify-center hover:bg-surface-container-lowest transition-colors">
+<span class="material-symbols-outlined text-sm">remove</span>
+</button>
+<span class="w-8 text-center text-sm font-bold">2</span>
+<button class="w-8 h-8 rounded-full flex items-center justify-center hover:bg-surface-container-lowest transition-colors">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+</div>
+<button class="text-outline hover:text-error transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-lg">delete</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Remove</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="flex gap-6 group">
+<div class="relative w-32 h-40 flex-shrink-0 overflow-hidden rounded-lg bg-surface-container-low">
+<img class="w-full h-full object-cover" data-alt="poached eggs on sourdough toast with avocado and microgreens on a white stoneware plate" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDso04s0V7yskrIzOK4AbIe-y9C_p8rYnTpgyN62-xotgT2SOedu4xAMu8IC-g6sJvuoIRPKhLUsCcG3-_Y33fCSIE1y2BR-pl2RdT9fr8NYIurwXF-IoVsI8PRo3C2Idv5MujFhvgqOJzVLYCCix-2oW1uOHdL_HI6-R_fujJ6ibBRqDEz1CxRwh-9IbbEm6uWg-W-kgfdBekkiL0NK90nZy0xIthaL6it1X8AApN7_HjOqIkeLqYTlOfMs88q4_gSDN1JXaV7_MI-"/>
+</div>
+<div class="flex-grow flex flex-col justify-between py-1">
+<div>
+<div class="flex justify-between items-start">
+<h3 class="text-xl font-serif text-on-surface">The Editorial Toast</h3>
+<span class="text-lg font-medium text-primary">$14.00</span>
+</div>
+<p class="text-sm text-on-surface-variant mt-1">Sourdough base, poached heritage eggs, house-made dukkah.</p>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center bg-surface-container-high rounded-full px-1 py-1">
+<button class="w-8 h-8 rounded-full flex items-center justify-center hover:bg-surface-container-lowest transition-colors">
+<span class="material-symbols-outlined text-sm">remove</span>
+</button>
+<span class="w-8 text-center text-sm font-bold">1</span>
+<button class="w-8 h-8 rounded-full flex items-center justify-center hover:bg-surface-container-lowest transition-colors">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+</div>
+<button class="text-outline hover:text-error transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-lg">delete</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Remove</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Summary & Payment -->
+<div class="lg:col-span-5 mt-16 lg:mt-0">
+<div class="bg-surface-container-low rounded-xl p-8 sticky top-32">
+<div class="mb-8 p-4 bg-surface-container-lowest rounded-lg flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">table_restaurant</span>
+</div>
+<div>
+<p class="text-[10px] font-bold uppercase tracking-widest text-outline">Current Location</p>
+<p class="font-serif text-on-surface">Table 12 • Premium Window Seating</p>
+</div>
+</div>
+<h2 class="text-2xl font-serif mb-6">Payment Method</h2>
+<div class="space-y-3 mb-10">
+<label class="relative flex items-center p-4 bg-surface-container-highest rounded-lg cursor-pointer border border-transparent has-[:checked]:border-primary transition-all">
+<input checked="" class="sr-only" name="payment" type="radio"/>
+<div class="flex items-center justify-between w-full">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary">credit_card</span>
+<div class="flex flex-col">
+<span class="text-sm font-bold">Credit Card</span>
+<span class="text-xs text-on-surface-variant">Ending in 4421</span>
+</div>
+</div>
+<div class="w-5 h-5 rounded-full border-2 border-primary flex items-center justify-center">
+<div class="w-2.5 h-2.5 bg-primary rounded-full"></div>
+</div>
+</div>
+</label>
+<label class="relative flex items-center p-4 bg-surface-container-highest rounded-lg cursor-pointer border border-transparent has-[:checked]:border-primary transition-all">
+<input class="sr-only" name="payment" type="radio"/>
+<div class="flex items-center justify-between w-full">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant">wallet</span>
+<div class="flex flex-col">
+<span class="text-sm font-bold">Digital Wallet</span>
+<span class="text-xs text-on-surface-variant">Apple Pay / Google Pay</span>
+</div>
+</div>
+<div class="w-5 h-5 rounded-full border-2 border-outline-variant"></div>
+</div>
+</label>
+</div>
+<div class="space-y-4 pt-6 border-t border-outline-variant/20 mb-8">
+<div class="flex justify-between text-sm">
+<span class="text-on-surface-variant">Subtotal</span>
+<span class="text-on-surface font-medium">$31.00</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-on-surface-variant">Service Charge (10%)</span>
+<span class="text-on-surface font-medium">$3.10</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-on-surface-variant">Tax</span>
+<span class="text-on-surface font-medium">$1.85</span>
+</div>
+<div class="flex justify-between text-xl font-serif pt-4 border-t border-outline-variant/10">
+<span>Total Due</span>
+<span class="text-primary font-bold">$35.95</span>
+</div>
+</div>
+<button class="w-full py-5 bg-gradient-to-r from-primary to-primary-container text-on-primary rounded-xl font-bold uppercase tracking-widest text-sm shadow-lg hover:brightness-110 active:scale-[0.98] transition-all">
+                    Confirm &amp; Pay
+                </button>
+<p class="text-[10px] text-center text-outline mt-6 font-medium uppercase tracking-tighter">
+                    Secure checkout powered by Editorial Systems • Receipt will be emailed
+                </p>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-safe h-20 bg-stone-50/90 dark:bg-stone-900/90 backdrop-blur-xl border-t border-stone-200/30 dark:border-stone-800/30 shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
+<div class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 p-2 active:scale-90 transition-transform">
+<span class="material-symbols-outlined">restaurant_menu</span>
+<span class="font-sans text-[10px] uppercase tracking-widest font-semibold mt-1">Menu</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 p-2 active:scale-90 transition-transform">
+<span class="material-symbols-outlined">star</span>
+<span class="font-sans text-[10px] uppercase tracking-widest font-semibold mt-1">Favorites</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 p-2 active:scale-90 transition-transform">
+<span class="material-symbols-outlined">shopping_bag</span>
+<span class="font-sans text-[10px] uppercase tracking-widest font-semibold mt-1">Orders</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-orange-900 dark:bg-orange-200 text-white dark:text-stone-900 rounded-full w-14 h-14 -mt-6 shadow-lg active:scale-90 transition-transform">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="font-sans text-[10px] uppercase tracking-widest font-semibold">Cart</span>
+</div>
+</nav>
+</body></html>

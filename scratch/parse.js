@@ -1,0 +1,668 @@
+const fs = require('fs');
+
+const rawText = `
+Coffee — 20 Menu Lengkap
+1. Espresso Con Panna
+Deskripsi: Double espresso dengan whipped cream tipis.
+Vessel Size: Single / Double
+Milk Base: None
+Sweetness: No sugar / Simple syrup
+Temperature: Hot
+Intensity (Shots): 2 (default) / +Rp8.000 per extra shot
+Penyajian: Tanpa es
+Harga: Rp32.000
+
+2. Americano Classic
+Deskripsi: Espresso ditambah air panas, clean & bold.
+Vessel Size: Regular / Large
+Milk Base: None
+Sweetness: No sugar / Simple syrup
+Temperature: Hot / Iced
+Intensity (Shots): 1–3
+Harga: Rp30.000
+
+3. Cappuccino Signature
+Deskripsi: Espresso, steamed milk, microfoam; taburan cocoa.
+Vessel Size: Regular / Large
+Milk Base: Whole / Oat (+Rp12.000) / Almond (+Rp12.000)
+Sweetness: Normal / Less
+Temperature: Hot
+Intensity (Shots): 1–2
+Harga: Rp42.000
+
+4. Latte Art
+Deskripsi: Espresso dengan steamed milk, latte art.
+Vessel Size: Regular / Large
+Milk Base: Whole / Oat (+Rp12.000) / Almond (+Rp12.000)
+Sweetness: No sugar / Vanilla syrup
+Temperature: Hot / Iced
+Intensity (Shots): 1–2
+Harga: Rp45.000
+
+5. Flat White
+Deskripsi: Ristretto shot + velvety microfoam, lebih pekat dari latte.
+Vessel Size: Regular
+Milk Base: Whole / Oat (+Rp12.000)
+Sweetness: No sugar / Brown sugar syrup
+Temperature: Hot
+Intensity (Shots): 2
+Harga: Rp46.000
+
+6. Mocha
+Deskripsi: Espresso + chocolate syrup + steamed milk.
+Vessel Size: Regular / Large
+Milk Base: Whole / Almond (+Rp12.000)
+Sweetness: Normal / Extra chocolate
+Temperature: Hot / Iced
+Intensity (Shots): 1–2
+Harga: Rp50.000
+
+7. Caramel Macchiato
+Deskripsi: Vanilla syrup, steamed milk, espresso shot, caramel drizzle.
+Vessel Size: Regular / Large
+Milk Base: Whole / Oat (+Rp12.000)
+Sweetness: Normal / Extra
+Temperature: Hot / Iced
+Intensity (Shots): 1–2
+Harga: Rp48.000
+
+8. Affogato Espresso
+Deskripsi: Single espresso dituangkan di atas scoop vanilla gelato.
+Vessel Size: Single serve
+Milk Base: None
+Sweetness: Gelato manis
+Temperature: Hot espresso + cold gelato
+Intensity (Shots): 1
+Harga: Rp55.000
+
+9. Cortado
+Deskripsi: Espresso dan equal part steamed milk, seimbang.
+Vessel Size: Small (150 ml)
+Milk Base: Whole / Oat (+Rp12.000)
+Sweetness: No sugar / Simple syrup
+Temperature: Hot
+Intensity (Shots): 1–2
+Harga: Rp38.000
+
+10. Honey Cinnamon Latte
+Deskripsi: Espresso, steamed milk, honey drizzle, cinnamon dust.
+Vessel Size: Regular / Large
+Milk Base: Whole / Oat (+Rp12.000)
+Sweetness: Honey (default) / Less
+Temperature: Hot / Iced
+Intensity (Shots): 1–2
+Harga: Rp50.000
+
+11. Irish‑Style Coffee (Non‑alcoholic option)
+Deskripsi: Espresso, brown sugar, whipped cream (non‑alcoholic).
+Vessel Size: Regular
+Milk Base: None / Whole (+Rp12.000)
+Sweetness: Brown sugar
+Temperature: Hot
+Intensity (Shots): 1–2
+Harga: Rp52.000
+
+12. Hazelnut Latte
+Deskripsi: Espresso + hazelnut syrup + steamed milk.
+Vessel Size: Regular / Large
+Milk Base: Whole / Almond (+Rp12.000)
+Sweetness: Normal / Extra
+Temperature: Hot / Iced
+Intensity (Shots): 1–2
+Harga: Rp50.000
+
+13. Ginger Espresso Tonic
+Deskripsi: Espresso shot di atas tonic water dengan ginger syrup.
+Vessel Size: Regular
+Milk Base: None
+Sweetness: Ginger syrup optional
+Temperature: Cold / Iced
+Intensity (Shots): 1
+Harga: Rp55.000
+
+14. Maple Pecan Latte
+Deskripsi: Maple syrup, pecan crumble, steamed milk, espresso.
+Vessel Size: Regular / Large
+Milk Base: Whole / Oat (+Rp12.000)
+Sweetness: Normal / Extra
+Temperature: Hot / Iced
+Intensity (Shots): 1–2
+Harga: Rp56.000
+
+15. Turkish Spiced Espresso
+Deskripsi: Espresso dengan campuran cardamom & cinnamon.
+Vessel Size: Small
+Milk Base: None
+Sweetness: Sugar optional
+Temperature: Hot
+Intensity (Shots): 1–2
+Harga: Rp40.000
+
+16. Iced Brown Sugar Latte
+Deskripsi: Espresso, brown sugar syrup, milk, es batu.
+Vessel Size: Regular / Large
+Milk Base: Whole / Oat (+Rp12.000)
+Sweetness: Brown sugar (default) / Less
+Temperature: Iced
+Intensity (Shots): 1–2
+Harga: Rp48.000
+
+17. Cascara Espresso
+Deskripsi: Espresso dengan sirup cascara (buah kopi) aroma buah.
+Vessel Size: Regular
+Milk Base: None / Splash milk optional
+Sweetness: Cascara syrup default
+Temperature: Hot / Iced
+Intensity (Shots): 1–2
+Harga: Rp54.000
+
+18. Matcha Espresso Fusion
+Deskripsi: Layer matcha latte dengan shot espresso (dirty matcha).
+Vessel Size: Regular / Large
+Milk Base: Whole / Oat (+Rp12.000)
+Sweetness: Normal / Less
+Temperature: Hot / Iced
+Intensity (Shots): 1
+Harga: Rp58.000
+
+19. Vanilla Bean Latte
+Deskripsi: Espresso + vanilla bean paste + steamed milk.
+Vessel Size: Regular / Large
+Milk Base: Whole / Oat (+Rp12.000)
+Sweetness: Normal / Extra
+Temperature: Hot / Iced
+Intensity (Shots): 1–2
+Harga: Rp49.000
+
+20. Seasonal Special — Pumpkin Spice Latte
+Deskripsi: (Seasonal) Espresso, pumpkin spice syrup, steamed milk, whipped cream.
+Vessel Size: Regular / Large
+Milk Base: Whole / Oat (+Rp12.000)
+Sweetness: Normal / Extra
+Temperature: Hot / Iced
+Intensity (Shots): 1–2
+Harga: Rp60.000
+
+Cold Brew — 20 Menu Lengkap
+1. Classic Kyoto Cold Brew
+Deskripsi: 12‑hour Kyoto cold drip, single‑origin Sumatra.
+Vessel Size: Regular (250 ml) / Large (350 ml)
+Milk Base: None (black) / Splash milk optional
+Sweetness: No sugar / Simple syrup
+Temperature: Cold
+Intensity (Shots): Concentrate standard; +Rp8.000 per extra shot
+Penyajian: Over ice or single crystal sphere
+Harga: Rp55.000
+
+2. Vanilla Sweet Cream Cold Brew
+Deskripsi: Cold brew + vanilla syrup + vanilla sweet cream foam.
+Vessel Size: Regular / Large
+Milk Base: Whole / Oat (+Rp12.000) optional in foam
+Sweetness: Normal (2 pumps) / Extra
+Temperature: Cold
+Harga: Rp58.000
+
+3. Salted Caramel Cold Brew
+Deskripsi: Cold brew + caramel syrup + salted cream top.
+Vessel Size: Regular / Large
+Milk Base: Whole / Oat (+Rp12.000) optional
+Sweetness: Normal / Extra
+Temperature: Cold
+Harga: Rp62.000
+
+4. Coconut Cold Brew
+Deskripsi: Cold brew blended with coconut milk & coconut syrup.
+Vessel Size: Regular / Large
+Milk Base: Coconut milk (default)
+Sweetness: Normal / Extra coconut
+Temperature: Cold
+Harga: Rp60.000
+
+5. Nitro Cold Brew
+Deskripsi: Nitro‑infused cold brew, creamy mouthfeel, served without ice.
+Vessel Size: Tall / Grande
+Milk Base: None
+Sweetness: Optional vanilla syrup
+Temperature: Cold (no ice)
+Harga: Rp65.000
+
+6. Cold Brew Tonic
+Deskripsi: Cold brew concentrate + tonic water, lime garnish.
+Vessel Size: Regular
+Milk Base: None
+Sweetness: No sugar
+Temperature: Cold
+Harga: Rp58.000
+
+7. Honey Almond Cold Brew
+Deskripsi: Cold brew + almond milk + honey drizzle.
+Vessel Size: Regular / Large
+Milk Base: Almond milk (+Rp12.000)
+Sweetness: Honey syrup
+Temperature: Cold
+Harga: Rp62.000
+
+8. Mocha Cold Brew
+Deskripsi: Cold brew + chocolate syrup + splash milk.
+Vessel Size: Regular / Large
+Milk Base: Whole / Almond (+Rp12.000)
+Sweetness: Normal / Extra chocolate
+Temperature: Cold
+Harga: Rp60.000
+
+9. Citrus Cold Brew
+Deskripsi: Cold brew infused with orange slice & lemon zest.
+Vessel Size: Regular
+Milk Base: None
+Sweetness: Honey syrup optional
+Temperature: Cold
+Harga: Rp57.000
+
+10. Spiced Cold Brew
+Deskripsi: Cold brew + cinnamon & nutmeg; brown sugar syrup.
+Vessel Size: Regular / Large
+Milk Base: Whole / Oat (+Rp12.000) optional
+Sweetness: Brown sugar syrup
+Temperature: Cold
+Harga: Rp63.000
+
+11. Maple Cold Brew
+Deskripsi: Cold brew + maple syrup + light cream float.
+Vessel Size: Regular / Large
+Milk Base: Whole / Oat (+Rp12.000) optional
+Sweetness: Maple (default) / Less
+Temperature: Cold
+Harga: Rp61.000
+
+12. Vanilla Orange Cold Brew
+Deskripsi: Cold brew + vanilla syrup + orange peel garnish.
+Vessel Size: Regular
+Milk Base: None
+Sweetness: Normal / Less
+Temperature: Cold
+Harga: Rp59.000
+
+13. Café Affogato Cold Brew
+Deskripsi: Cold brew concentrate poured over a scoop of gelato.
+Vessel Size: Single serve
+Milk Base: None
+Sweetness: Gelato sweetness
+Temperature: Cold
+Harga: Rp70.000
+
+14. Rosemary Honey Cold Brew
+Deskripsi: Cold brew + rosemary‑infused honey syrup, citrus twist.
+Vessel Size: Regular
+Milk Base: None / Splash milk optional
+Sweetness: Honey (default)
+Temperature: Cold
+Harga: Rp64.000
+
+15. Cascara Cold Brew
+Deskripsi: Cold brew with cascara syrup (buah kopi) aroma fruity.
+Vessel Size: Regular / Large
+Milk Base: None
+Sweetness: Cascara syrup default
+Temperature: Cold
+Harga: Rp60.000
+
+16. Iced Brown Sugar Cold Brew
+Deskripsi: Cold brew + brown sugar syrup + milk swirl.
+Vessel Size: Regular / Large
+Milk Base: Whole / Oat (+Rp12.000)
+Sweetness: Brown sugar (default)
+Temperature: Cold
+Harga: Rp62.000
+
+17. Ginger Lime Cold Brew
+Deskripsi: Cold brew + ginger syrup + lime wedge.
+Vessel Size: Regular
+Milk Base: None
+Sweetness: Ginger syrup optional
+Temperature: Cold
+Harga: Rp58.000
+
+18. Vanilla Sweet Cream Cold Brew (Oat)
+Deskripsi: Cold brew + vanilla sweet cream dibuat dengan oat milk.
+Vessel Size: Regular / Large
+Milk Base: Oat (+Rp12.000)
+Sweetness: Vanilla (default) / Extra
+Temperature: Cold
+Harga: Rp70.000
+
+19. Cardamom Cold Brew
+Deskripsi: Cold brew + cardamom infusion, floral & spicy.
+Vessel Size: Regular
+Milk Base: None / Splash milk optional
+Sweetness: Simple syrup optional
+Temperature: Cold
+Harga: Rp59.000
+
+20. Seasonal Fruit Cold Brew
+Deskripsi: Cold brew + seasonal fruit purée (e.g., mango/berry) light.
+Vessel Size: Regular / Large
+Milk Base: None / Coconut milk optional (+Rp12.000)
+Sweetness: Fruit syrup default / Less
+Temperature: Cold
+Harga: Rp66.000
+
+Non‑Coffee — 20 Menu Lengkap (Teh, Cokelat, Minuman Segar, Smoothie, Mocktail, dan Snack Minuman)
+1. Matcha Latte
+Deskripsi: Premium ceremonial matcha + steamed milk.
+Vessel Size: Regular / Large
+Milk Base: Whole / Oat (+Rp12.000) / Almond (+Rp12.000)
+Sweetness: No sugar / Honey / Normal
+Temperature: Hot / Iced
+Harga: Rp48.000
+
+2. Chai Latte
+Deskripsi: Black tea blend + chai spices + steamed milk.
+Vessel Size: Regular / Large
+Milk Base: Whole / Oat (+Rp12.000)
+Sweetness: Normal / Less
+Temperature: Hot / Iced
+Harga: Rp46.000
+
+3. Hot Chocolate Signature
+Deskripsi: Dark chocolate melted with steamed milk, whipped cream optional.
+Vessel Size: Regular / Large
+Milk Base: Whole / Oat (+Rp12.000)
+Sweetness: Normal / Extra chocolate
+Temperature: Hot / Iced
+Harga: Rp45.000
+
+4. Iced Lemon Tea
+Deskripsi: Black tea brewed + fresh lemon + simple syrup.
+Vessel Size: Regular / Large
+Milk Base: None
+Sweetness: Normal / Less
+Temperature: Cold
+Harga: Rp30.000
+
+5. Ginger Honey Lemon
+Deskripsi: Fresh ginger infusion + honey + lemon; soothing.
+Vessel Size: Regular
+Milk Base: None
+Sweetness: Honey default / Less
+Temperature: Hot / Iced
+Harga: Rp34.000
+
+6. Turmeric Golden Latte
+Deskripsi: Turmeric, ginger, cinnamon + steamed milk.
+Vessel Size: Regular / Large
+Milk Base: Whole / Oat (+Rp12.000)
+Sweetness: Honey / Normal
+Temperature: Hot / Iced
+Harga: Rp50.000
+
+7. Berry Smoothie
+Deskripsi: Mixed berries, banana, yogurt, honey.
+Vessel Size: Regular (350 ml)
+Milk Base: Yogurt / Almond milk (+Rp12.000)
+Sweetness: Honey default / Less
+Temperature: Cold / Blended
+Harga: Rp55.000
+
+8. Mango Lassi
+Deskripsi: Mango purée + yogurt + cardamom.
+Vessel Size: Regular
+Milk Base: Yogurt
+Sweetness: Normal / Less
+Temperature: Cold
+Harga: Rp58.000
+
+9. Sparkling Yuzu Soda
+Deskripsi: Yuzu citrus + soda water + mint garnish.
+Vessel Size: Regular
+Milk Base: None
+Sweetness: Yuzu syrup default / Less
+Temperature: Cold
+Harga: Rp42.000
+
+10. Kombucha House Brew
+Deskripsi: House‑fermented kombucha, rotating flavors.
+Vessel Size: Bottle / Glass
+Milk Base: None
+Sweetness: Naturally tart; syrup optional
+Temperature: Cold
+Harga: Rp48.000
+
+11. Iced Hibiscus Tea
+Deskripsi: Hibiscus infusion, floral & tart, served with lime.
+Vessel Size: Regular
+Milk Base: None
+Sweetness: Normal / Less
+Temperature: Cold
+Harga: Rp36.000
+
+12. Cucumber Mint Cooler
+Deskripsi: Fresh cucumber juice, mint, soda, lime.
+Vessel Size: Regular
+Milk Base: None
+Sweetness: Simple syrup optional
+Temperature: Cold
+Harga: Rp40.000
+
+13. Hot Lemon Ginger Honey (Wellness)
+Deskripsi: Fresh lemon, ginger, honey — immune boost.
+Vessel Size: Regular
+Milk Base: None
+Sweetness: Honey default
+Temperature: Hot
+Harga: Rp32.000
+
+14. Vanilla Almond Milkshake
+Deskripsi: Vanilla ice cream + almond milk + whipped cream.
+Vessel Size: Regular
+Milk Base: Almond milk (+Rp12.000)
+Sweetness: Normal / Extra
+Temperature: Cold / Blended
+Harga: Rp52.000
+
+15. Sparkling Apple Ginger
+Deskripsi: Fresh apple juice + ginger + sparkling water.
+Vessel Size: Regular
+Milk Base: None
+Sweetness: Apple natural / Syrup optional
+Temperature: Cold
+Harga: Rp38.000
+
+16. Lavender Lemonade
+Deskripsi: House lemonade infused with lavender syrup.
+Vessel Size: Regular
+Milk Base: None
+Sweetness: Normal / Less
+Temperature: Cold
+Harga: Rp36.000
+
+17. Chocolate Banana Smoothie
+Deskripsi: Cocoa, banana, milk/yogurt, honey.
+Vessel Size: Regular
+Milk Base: Whole / Almond (+Rp12.000)
+Sweetness: Honey default / Less
+Temperature: Cold / Blended
+Harga: Rp55.000
+
+18. Herbal Tea Flight
+Deskripsi: Trio sampler: chamomile, peppermint, rooibos.
+Vessel Size: Flight (3 x small cups)
+Milk Base: None
+Sweetness: Honey optional
+Temperature: Hot
+Harga: Rp45.000
+
+19. Cocoa Affogato (Non‑coffee)
+Deskripsi: Hot chocolate shot poured over vanilla gelato.
+Vessel Size: Single serve
+Milk Base: None
+Sweetness: Gelato sweetness
+Temperature: Hot + Cold
+Harga: Rp68.000
+
+20. Seasonal Fruit Cooler
+Deskripsi: Puree buah musiman + soda / still water + mint.
+Vessel Size: Regular / Large
+Milk Base: None / Coconut milk optional (+Rp12.000)
+Sweetness: Fruit syrup default / Less
+Temperature: Cold
+Harga: Rp50.000
+\`;
+
+function generateId(catPrefix, index) {
+  return \`item-\${catPrefix}-\${index}\`;
+}
+
+function parseChoices(line, prefix) {
+  const parts = line.split('/').map(p => p.trim());
+  return parts.map((p, i) => {
+    let price = 0;
+    let name = p;
+    const match = p.match(/(+Rp([d.]+))/);
+    if (match) {
+      price = parseInt(match[2].replace('.', ''), 10);
+      name = p.replace(match[0], '').trim();
+    }
+    return {
+      id: \`\${prefix}-\${i}\`,
+      name: name,
+      priceDelta: price,
+      isAvailable: true
+    };
+  });
+}
+
+const items = [];
+let currentCategory = 'cat-1';
+let catPrefix = 'c';
+const lines = rawText.split('n');
+let currentItem = null;
+
+let catIndex = 1;
+
+for (let line of lines) {
+  line = line.trim();
+  if (!line) continue;
+
+  if (line.startsWith('Coffee —')) { currentCategory = 'cat-1'; catPrefix = 'c'; catIndex = 1; continue; }
+  if (line.startsWith('Cold Brew —')) { currentCategory = 'cat-1b'; catPrefix = 'cb'; catIndex = 1; continue; }
+  if (line.startsWith('Non‑Coffee —')) { currentCategory = 'cat-2'; catPrefix = 'nc'; catIndex = 1; continue; }
+
+  const titleMatch = line.match(/^d+.s+(.*)/);
+  if (titleMatch) {
+    if (currentItem) items.push(currentItem);
+    currentItem = {
+      id: generateId(catPrefix, catIndex++),
+      categoryId: currentCategory,
+      name: titleMatch[1],
+      description: '',
+      image: 'https://images.unsplash.com/photo-1517701550927-30cfcb64db18?auto=format&fit=crop&w=800&q=80',
+      basePrice: 0,
+      tags: [],
+      isAvailable: true,
+      addOnGroups: []
+    };
+    if (currentCategory === 'cat-1') {
+      currentItem.image = 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80';
+    } else if (currentCategory === 'cat-1b') {
+      currentItem.image = 'https://images.unsplash.com/photo-1559525839-b184a4d698c7?auto=format&fit=crop&w=800&q=80';
+    } else if (currentCategory === 'cat-2') {
+      currentItem.image = 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=800&q=80';
+    }
+    continue;
+  }
+
+  if (!currentItem) continue;
+
+  if (line.startsWith('Deskripsi:')) {
+    currentItem.description = line.replace('Deskripsi:', '').trim();
+  } else if (line.startsWith('Vessel Size:')) {
+    const val = line.replace('Vessel Size:', '').trim();
+    if (val !== 'None' && val.toLowerCase() !== 'n/a') {
+      currentItem.addOnGroups.push({
+        id: \`\${currentItem.id}-sz\`,
+        name: 'Vessel Size',
+        minSelection: 1,
+        maxSelection: 1,
+        choices: parseChoices(val, 'sz')
+      });
+    }
+  } else if (line.startsWith('Milk Base:')) {
+    const val = line.replace('Milk Base:', '').trim();
+    if (val !== 'None' && val.toLowerCase() !== 'n/a') {
+      currentItem.addOnGroups.push({
+        id: \`\${currentItem.id}-mk\`,
+        name: 'Milk Base',
+        minSelection: 1,
+        maxSelection: 1,
+        choices: parseChoices(val, 'mk')
+      });
+    }
+  } else if (line.startsWith('Sweetness:')) {
+    const val = line.replace('Sweetness:', '').trim();
+    if (val !== 'None' && val.toLowerCase() !== 'n/a') {
+      currentItem.addOnGroups.push({
+        id: \`\${currentItem.id}-sw\`,
+        name: 'Sweetness',
+        minSelection: 1,
+        maxSelection: 1,
+        choices: parseChoices(val, 'sw')
+      });
+    }
+  } else if (line.startsWith('Temperature:')) {
+    const val = line.replace('Temperature:', '').trim();
+    if (val !== 'None' && val.toLowerCase() !== 'n/a') {
+      currentItem.addOnGroups.push({
+        id: \`\${currentItem.id}-tp\`,
+        name: 'Temperature',
+        minSelection: 1,
+        maxSelection: 1,
+        choices: parseChoices(val, 'tp')
+      });
+    }
+  } else if (line.startsWith('Intensity (Shots):')) {
+    const val = line.replace('Intensity (Shots):', '').trim();
+    if (val !== 'None' && val.toLowerCase() !== 'n/a' && val.includes('+Rp8.000 per extra shot')) {
+      currentItem.addOnGroups.push({
+        id: \`\${currentItem.id}-sh\`,
+        name: 'Extra Shot',
+        minSelection: 0,
+        maxSelection: 2,
+        choices: [
+          { id: 'sh-1', name: '+1 Shot', priceDelta: 8000, isAvailable: true },
+          { id: 'sh-2', name: '+2 Shots', priceDelta: 16000, isAvailable: true }
+        ]
+      });
+    }
+  } else if (line.startsWith('Harga:')) {
+    const priceStr = line.replace('Harga: Rp', '').replace('.', '').trim();
+    currentItem.basePrice = parseInt(priceStr, 10);
+  }
+}
+if (currentItem) items.push(currentItem);
+
+const output = items.map(item => {
+  // Add meta block for barista spec
+  const meta = {
+    schema_version: '1.0',
+    sku_code: \`SKU-\${item.id.toUpperCase()}\`,
+    category: item.categoryId === 'cat-1' ? 'Coffee' : item.categoryId === 'cat-1b' ? 'Cold Brew' : 'Non-Coffee',
+    short_description: item.description,
+    serve_temperature: item.addOnGroups.find(g => g.name === 'Temperature') ? 'various' : 'hot',
+    allergens: [],
+    prep_time_estimate_seconds: 60,
+    recommended_pairings: [],
+    barista_recipe: {
+      coffee_origin_or_blend: 'House Blend',
+      roast_level: 'Medium-Dark',
+      dose_grams: 18,
+      yield_ml: 40,
+      extraction_time_seconds: 30,
+      presentation_notes: 'Follow standard cafe protocols.'
+    }
+  };
+  item.meta = meta;
+  return JSON.stringify(item, null, 2);
+}).join(',n');
+
+fs.writeFileSync('scratch/menu_dump.js', \`export const GENERATED_ITEMS = [n\${output}n];\`);
+console.log('Done mapping 60 items!');

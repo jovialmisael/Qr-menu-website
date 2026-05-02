@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Truffle Mushroom Pasta - The Editorial Bistro</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-container": "#606657",
+                    "on-surface-variant": "#514440",
+                    "on-background": "#1c1c19",
+                    "on-primary-fixed-variant": "#673b2e",
+                    "on-secondary-fixed": "#181d12",
+                    "inverse-primary": "#f6b8a6",
+                    "on-primary-container": "#fffbff",
+                    "secondary": "#5a6052",
+                    "surface-container": "#f0ede9",
+                    "surface-container-low": "#f6f3ee",
+                    "surface": "#fcf9f4",
+                    "surface-bright": "#fcf9f4",
+                    "primary": "#7f5041",
+                    "on-primary": "#ffffff",
+                    "surface-dim": "#dcdad5",
+                    "on-primary-fixed": "#331207",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "surface-container-highest": "#e5e2dd",
+                    "on-error-container": "#93000a",
+                    "primary-fixed": "#ffdbd0",
+                    "on-error": "#ffffff",
+                    "primary-container": "#9b6858",
+                    "tertiary-container": "#4f7d76",
+                    "on-tertiary-container": "#f4fffc",
+                    "secondary-fixed-dim": "#c3c9b7",
+                    "tertiary-fixed-dim": "#a0d0c8",
+                    "outline": "#84746f",
+                    "error-container": "#ffdad6",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-fixed": "#bbece4",
+                    "on-tertiary-fixed": "#00201d",
+                    "on-surface": "#1c1c19",
+                    "primary-fixed-dim": "#f6b8a6",
+                    "inverse-surface": "#31302d",
+                    "secondary-container": "#dfe5d2",
+                    "background": "#fcf9f4",
+                    "outline-variant": "#d6c2bd",
+                    "surface-container-high": "#ebe8e3",
+                    "on-secondary-fixed-variant": "#43493b",
+                    "surface-tint": "#825244",
+                    "surface-variant": "#e5e2dd",
+                    "on-tertiary-fixed-variant": "#1f4e48",
+                    "tertiary": "#36645d",
+                    "inverse-on-surface": "#f3f0eb",
+                    "secondary-fixed": "#dfe5d2",
+                    "error": "#ba1a1a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "1.5rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Noto Serif"],
+                    "body": ["Manrope"],
+                    "label": ["Manrope"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-effect {
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+      }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface antialiased">
+<!-- TopNavBar Implementation -->
+<header class="fixed top-0 w-full z-50 bg-stone-50/80 dark:bg-stone-900/80 backdrop-blur-xl shadow-sm dark:shadow-none">
+<div class="flex justify-between items-center px-6 py-4 max-w-screen-2xl mx-auto">
+<div class="text-2xl font-serif italic text-orange-900 dark:text-orange-200">The Editorial Bistro</div>
+<nav class="hidden md:flex items-center space-x-8">
+<a class="text-orange-900 dark:text-orange-200 border-b-2 border-orange-900 pb-1 font-serif tracking-tight" href="#">The Menu</a>
+<a class="text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors font-serif tracking-tight" href="#">Our Roasts</a>
+<a class="text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors font-serif tracking-tight" href="#">Order History</a>
+</nav>
+<div class="flex items-center gap-4">
+<div class="hidden sm:flex flex-col items-end mr-2">
+<span class="text-xs font-label uppercase tracking-widest text-on-surface-variant">Active Session</span>
+<span class="text-sm font-medium text-primary">Table 12</span>
+</div>
+<button class="p-2 rounded-full hover:bg-stone-100/50 transition-all duration-300">
+<span class="material-symbols-outlined">shopping_bag</span>
+</button>
+</div>
+</div>
+</header>
+<!-- SideNavBar (Hidden on mobile, implementation for Desktop canvas) -->
+<aside class="fixed left-0 top-0 h-full w-64 z-40 hidden lg:flex flex-col p-4 bg-stone-50 dark:bg-stone-950 border-r border-stone-200 dark:border-stone-800">
+<div class="mb-10 pt-20 px-2">
+<div class="text-xl font-serif text-orange-900 dark:text-orange-200 mb-1">The Editorial Bistro</div>
+<div class="text-xs font-label text-stone-500">Table 12 • Premium Roast Selection</div>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 bg-stone-200/50 dark:bg-stone-800/50 text-orange-900 dark:text-orange-200 font-medium rounded-lg" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-serif">The Menu</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-600 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-900 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">coffee</span>
+<span class="font-serif">Our Roasts</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-600 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-900 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-serif">Order History</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-600 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-900 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">help_outline</span>
+<span class="font-serif">Help</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-600 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-900 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-serif">Settings</span>
+</a>
+</nav>
+<button class="mt-auto mb-4 w-full bg-primary text-on-primary py-4 rounded-xl font-semibold shadow-lg hover:opacity-90 transition-all">
+            View Cart
+        </button>
+</aside>
+<!-- Main Content Canvas (Background behind the panel) -->
+<main class="pt-24 pb-32 lg:pl-72 px-6 max-w-7xl mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 opacity-40">
+<div class="space-y-6">
+<h1 class="text-5xl font-headline text-on-surface leading-tight">Hand-Crafted<br/>Italian Cuisine</h1>
+<p class="text-lg text-on-surface-variant max-w-md">Experience the symphony of flavors in our seasonally inspired menu, curated by our head sommelier.</p>
+</div>
+<div class="aspect-[4/3] rounded-xl overflow-hidden bg-surface-container shadow-sm">
+<img class="w-full h-full object-cover" data-alt="close-up of gourmet mushroom pasta with truffle shavings and fresh herbs on a rustic ceramic plate in soft window light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJ53Fck8hjAGHUV2bzNDsrEQ1qZRAWCnd9t3YrANRYUxYe78UD6MJ0LVPvF59EapR6PWXUEab7LLMDsRcKWCrBG3YcstjfdPwVShz6oU3W3dn4WEhsfXs6F54YJaaI8LWmOCVyH_w_lQMsu_L71xDB1e4oeZ5_QTXaEW818ZAA1Ql-iEz3oaJOz4Uy3uiwtwn0xjXajicR607oCRVuPO3h4ZIU9DMARjUFbfJudG_qx96AIFV7DzL7xifFSRTiKRqbtNDLuQKaxytT"/>
+</div>
+</div>
+<!-- Customization Overlay/Panel Container -->
+<div class="fixed inset-0 z-[60] flex items-center justify-center sm:p-6 lg:p-12">
+<!-- Backdrop -->
+<div class="absolute inset-0 bg-on-background/20 backdrop-blur-md"></div>
+<!-- Panel Content -->
+<div class="relative w-full max-w-4xl h-full max-h-[921px] bg-surface rounded-none sm:rounded-xl shadow-2xl overflow-hidden flex flex-col md:flex-row">
+<!-- Close Button (Mobile) -->
+<button class="absolute top-4 right-4 z-10 p-2 bg-surface/80 glass-effect rounded-full md:hidden">
+<span class="material-symbols-outlined">close</span>
+</button>
+<!-- Left Column: Visual & Header -->
+<div class="w-full md:w-5/12 relative h-64 md:h-full bg-surface-container-low overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="dramatic macro shot of truffle mushroom pasta with steam rising, golden lighting, and finely grated parmesan cheese" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5boDAWNt96-ASGm1_tJWaqOEOi6b1nrljuSgBP-H-yPkjxDCyAD7pvVMn9Od0OJNgbqyHDpynKVJ47d4FXG904noNpH_CLEg55gXxfqG2bJRJevB80d_ZolGA5EenJysGx8Fcjp_nJlwd6Yyx-amflMQ538B2R0Y0E4_xrri6SusOJ_fJDUE1gUecKkmN4zFw-35KTqStureBndi3bEC0qp9TBJ-OdaLDIyWFQul8C5TUMtDn6pOFA3q_VjkZklDQlueD_JN4Idt7"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-background/60 via-transparent to-transparent md:hidden"></div>
+<div class="absolute bottom-4 left-6 md:hidden">
+<h2 class="text-3xl font-headline text-white">Truffle Mushroom Pasta</h2>
+<p class="text-white/80 font-body text-sm">Wild foragers mushrooms &amp; black truffle oil</p>
+</div>
+</div>
+<!-- Right Column: Form & Customization -->
+<div class="w-full md:w-7/12 flex flex-col bg-surface overflow-y-auto">
+<div class="p-8 pb-32">
+<!-- Desktop Header -->
+<div class="hidden md:block mb-8">
+<div class="flex justify-between items-start">
+<div>
+<h2 class="text-4xl font-headline text-on-surface mb-2">Truffle Mushroom Pasta</h2>
+<div class="flex gap-2">
+<span class="px-2 py-1 bg-tertiary/10 text-tertiary text-[10px] font-label font-bold uppercase tracking-widest rounded-full">House Specialty</span>
+<span class="px-2 py-1 bg-secondary-container text-on-secondary-container text-[10px] font-label font-bold uppercase tracking-widest rounded-full">Vegetarian</span>
+</div>
+</div>
+<span class="text-2xl font-serif text-primary">$14.50</span>
+</div>
+<p class="mt-6 text-on-surface-variant leading-relaxed font-body">
+                                Artisan tagliatelle tossed in a rich, buttery emulsion of porcini, cremini, and shiitake mushrooms, finished with aromatic Umbrian black truffle oil and toasted pine nuts.
+                            </p>
+</div>
+<div class="space-y-10">
+<!-- Multi-Select: Extra Cheese -->
+<section>
+<div class="flex justify-between items-end mb-4">
+<h3 class="text-xs font-label font-bold uppercase tracking-[0.2em] text-on-surface-variant">Extra Cheese</h3>
+<span class="text-[10px] text-outline font-medium">OPTIONAL</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<label class="group flex items-center justify-between p-4 bg-surface-container-low rounded-lg cursor-pointer hover:bg-surface-container-high transition-all">
+<div class="flex items-center gap-3">
+<input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/>
+<span class="text-sm font-medium">Aged Parmesan</span>
+</div>
+<span class="text-xs text-primary-container">+$1.50</span>
+</label>
+<label class="group flex items-center justify-between p-4 bg-surface-container-low rounded-lg cursor-pointer hover:bg-surface-container-high transition-all">
+<div class="flex items-center gap-3">
+<input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/>
+<span class="text-sm font-medium">Pecorino Romano</span>
+</div>
+<span class="text-xs text-primary-container">+$1.50</span>
+</label>
+<label class="group flex items-center justify-between p-4 bg-surface-container-low rounded-lg cursor-pointer hover:bg-surface-container-high transition-all">
+<div class="flex items-center gap-3">
+<input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/>
+<span class="text-sm font-medium">Gorgonzola Crumbles</span>
+</div>
+<span class="text-xs text-primary-container">+$2.00</span>
+</label>
+</div>
+</section>
+<!-- Single-Select: Spice Level -->
+<section>
+<div class="flex justify-between items-end mb-4">
+<h3 class="text-xs font-label font-bold uppercase tracking-[0.2em] text-on-surface-variant">Spice Level</h3>
+<span class="text-[10px] text-primary font-bold uppercase">Required</span>
+</div>
+<div class="flex flex-wrap gap-2">
+<label class="relative cursor-pointer">
+<input checked="" class="peer sr-only" name="spice" type="radio"/>
+<div class="px-6 py-3 rounded-full bg-surface-container-high text-on-surface-variant peer-checked:bg-tertiary peer-checked:text-on-tertiary text-sm font-semibold transition-all">
+                                            None
+                                        </div>
+</label>
+<label class="relative cursor-pointer">
+<input class="peer sr-only" name="spice" type="radio"/>
+<div class="px-6 py-3 rounded-full bg-surface-container-high text-on-surface-variant peer-checked:bg-tertiary peer-checked:text-on-tertiary text-sm font-semibold transition-all">
+                                            Mild
+                                        </div>
+</label>
+<label class="relative cursor-pointer">
+<input class="peer sr-only" name="spice" type="radio"/>
+<div class="px-6 py-3 rounded-full bg-surface-container-high text-on-surface-variant peer-checked:bg-tertiary peer-checked:text-on-tertiary text-sm font-semibold transition-all">
+                                            Spicy
+                                        </div>
+</label>
+</div>
+</section>
+<!-- Text Area: Special Instructions -->
+<section>
+<h3 class="text-xs font-label font-bold uppercase tracking-[0.2em] text-on-surface-variant mb-4">Special Instructions</h3>
+<textarea class="w-full bg-surface-container-highest border-none rounded-xl p-4 focus:ring-2 focus:ring-primary/40 placeholder:text-outline/60 text-sm" placeholder="e.g., Al dente, no pine nuts, allergy warnings..." rows="3"></textarea>
+</section>
+</div>
+</div>
+<!-- Footer Action Bar (Sticky inside panel) -->
+<div class="absolute bottom-0 right-0 w-full md:w-7/12 p-6 bg-surface/90 glass-effect border-t border-outline-variant/10">
+<div class="flex items-center gap-6 max-w-2xl mx-auto">
+<!-- Quantity Selector -->
+<div class="flex items-center bg-surface-container-highest rounded-full px-2 py-1">
+<button class="w-10 h-10 flex items-center justify-center text-primary hover:bg-surface-container-high rounded-full transition-colors">
+<span class="material-symbols-outlined">remove</span>
+</button>
+<span class="w-8 text-center font-bold text-on-surface">1</span>
+<button class="w-10 h-10 flex items-center justify-center text-primary hover:bg-surface-container-high rounded-full transition-colors">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+<!-- Add Button -->
+<button class="flex-1 bg-gradient-to-r from-primary to-primary-container text-on-primary py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all active:scale-95 flex justify-center items-center gap-3">
+                                Add to Order — $14.50
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar Implementation -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-safe h-20 bg-stone-50/90 dark:bg-stone-900/90 backdrop-blur-xl border-t border-stone-200/30 dark:border-stone-800/30 shadow-[0_-4px_20px_rgba(0,0,0,0.05)] md:hidden">
+<div class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 p-2">
+<span class="material-symbols-outlined" data-icon="restaurant_menu">restaurant_menu</span>
+<span class="text-[10px] uppercase tracking-widest font-semibold font-sans mt-1">Menu</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 p-2">
+<span class="material-symbols-outlined" data-icon="star">star</span>
+<span class="text-[10px] uppercase tracking-widest font-semibold font-sans mt-1">Favorites</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-orange-900 dark:bg-orange-200 text-white dark:text-stone-900 rounded-full w-14 h-14 -mt-6 shadow-lg">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 p-2">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+<span class="text-[10px] uppercase tracking-widest font-semibold font-sans mt-1">Cart</span>
+</div>
+</nav>
+</body></html>
