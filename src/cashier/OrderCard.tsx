@@ -1,15 +1,16 @@
 import { useState } from 'react';
-import { Order } from '../types/menu';
+import { Order, AddOnGroup, AddOnChoice } from '../types/menu';
 import { useMenuStore } from '../store/menu.store';
 import { formatPrice } from '../utils/formatters';
-import { CheckCircle2, Loader2, ChevronDown, ChevronUp, Printer } from 'lucide-react';
+import { CheckCircle2, Loader2, ChevronDown, ChevronUp, Printer, Banknote } from 'lucide-react';
 
 interface Props {
   order: Order;
-  onUpdateStatus: (id: string, status: Order['status']) => void;
+  onUpdateStatus: (id: string, status: Order['status'], paymentStatus?: Order['paymentStatus']) => void;
+  role?: 'cashier' | 'owner' | null;
 }
 
-export default function OrderCard({ order, onUpdateStatus }: Props) {
+export default function OrderCard({ order, onUpdateStatus, role = 'cashier' }: Props) {
   const { items: menuItems } = useMenuStore();
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -47,12 +48,21 @@ export default function OrderCard({ order, onUpdateStatus }: Props) {
         </head>
         <body>
           <div class="center bold border-b">
-            <h2 style="margin:0 0 8px 0">BERSEJUK QR</h2>
-            <p style="margin:0">Table: ${order.tableId}</p>
+            <h2 style="margin:0 0 4px 0">BERSEJUK QR</h2>
+            <p style="margin:0; font-size: 10px; font-weight: normal;">NPWP: 01.234.567.8-901.000</p>
+            <p style="margin:8px 0 0 0; font-size: 14px;">${order.orderType === 'takeaway' ? 'TAKE AWAY' : `Table: ${order.tableId}`}</p>
             <p style="margin:4px 0 0 0">Order: #${order.id}</p>
+            ${order.customerName ? `<p style="margin:4px 0 0 0; font-weight: normal;">Customer: ${order.customerName}</p>` : ''}
+            <p style="margin:4px 0 0 0; font-weight: normal; font-size: 10px;">${order.paymentMethod?.toUpperCase()} - ${order.paymentStatus?.toUpperCase()}</p>
           </div>
           <div class="border-b">
             ${itemsHtml}
+          </div>
+          <div class="border-b" style="margin-top: 8px;">
+            <div class="flex"><span style="font-weight: normal;">Subtotal</span><span style="font-weight: normal;">Rp ${order.subtotal?.toLocaleString('id-ID')}</span></div>
+            ${order.discount ? `<div class="flex"><span style="font-weight: normal;">Discount</span><span style="font-weight: normal;">-Rp ${order.discount?.toLocaleString('id-ID')}</span></div>` : ''}
+            <div class="flex"><span style="font-weight: normal;">Service (5%)</span><span style="font-weight: normal;">Rp ${order.serviceCharge?.toLocaleString('id-ID')}</span></div>
+            <div class="flex"><span style="font-weight: normal;">PB1 (10%)</span><span style="font-weight: normal;">Rp ${order.tax?.toLocaleString('id-ID')}</span></div>
           </div>
           <div class="flex bold">
             <span>TOTAL</span>
@@ -77,8 +87,8 @@ export default function OrderCard({ order, onUpdateStatus }: Props) {
       >
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <p className="text-[10px] font-label uppercase tracking-[0.2em] text-stone-400">
-              Order #{order.id} • Table {order.tableId}
+            <p className="text-[10px] font-label uppercase tracking-[0.2em] text-stone-400 flex items-center gap-1.5">
+              Order #{order.id} • {order.orderType === 'takeaway' ? <span className="text-amber-600 font-bold bg-amber-50 px-1.5 py-0.5 rounded">TAKE AWAY</span> : `Table ${order.tableId}`}
             </p>
             <span className="text-[10px] bg-stone-100 text-stone-500 px-1.5 py-0.5 rounded font-bold">
               {order.items.length} Items
@@ -86,6 +96,7 @@ export default function OrderCard({ order, onUpdateStatus }: Props) {
           </div>
           <p className="text-sm font-sans text-stone-800 font-bold mt-1">
             {new Date(order.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+            {order.customerName && <span className="ml-2 font-normal text-stone-500">• {order.customerName}</span>}
           </p>
         </div>
         <div className="flex items-center gap-3">
@@ -113,13 +124,13 @@ export default function OrderCard({ order, onUpdateStatus }: Props) {
             if (cartItem.options.temperature) addons.push(cartItem.options.temperature);
             if (cartItem.options.sweetness && cartItem.options.sweetness !== 'Normal Sweet') addons.push(`Sweetness: ${cartItem.options.sweetness}`);
             if (cartItem.options.syrup && cartItem.options.syrup.length > 0) {
-              cartItem.options.syrup.forEach((s: any) => addons.push(`Syrup: ${s.id.replace(/-/g, ' ')} (${s.pumps} pumps)`));
+              cartItem.options.syrup.forEach((s: { id: string; pumps: number }) => addons.push(`Syrup: ${s.id.replace(/-/g, ' ')} (${s.pumps} pumps)`));
             }
           } else if (cartItem.selectedAddOns) {
-            cartItem.selectedAddOns.forEach((sel: any) => {
-              const group = product?.addOnGroups?.find((g: any) => g.id === sel.groupId);
+            cartItem.selectedAddOns.forEach((sel: { groupId: string; choiceIds: string[] }) => {
+              const group = product?.addOnGroups?.find((g: AddOnGroup) => g.id === sel.groupId);
               sel.choiceIds?.forEach((cid: string) => {
-                const choice = group?.choices?.find((c: any) => c.id === cid);
+                const choice = group?.choices?.find((c: AddOnChoice) => c.id === cid);
                 addons.push(choice ? choice.name : `Custom: ${cid}`);
               });
             });
@@ -167,37 +178,56 @@ export default function OrderCard({ order, onUpdateStatus }: Props) {
             <Printer className="w-4 h-4" />
           </button>
           
-          {order.status === 'pending' && (
-            <button
-              onClick={() => onUpdateStatus(order.id, 'confirmed')}
-              className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-xl text-xs font-bold uppercase tracking-wider hover:bg-blue-700 transition-colors"
-            >
-              <CheckCircle2 className="w-4 h-4" /> Confirm
-            </button>
-          )}
-          {order.status === 'confirmed' && (
-            <button
-              onClick={() => onUpdateStatus(order.id, 'preparing')}
-              className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-xl text-xs font-bold uppercase tracking-wider hover:bg-purple-700 transition-colors"
-            >
-              <Loader2 className="w-4 h-4" /> Prepare
-            </button>
-          )}
-          {order.status === 'preparing' && (
-            <button
-              onClick={() => onUpdateStatus(order.id, 'ready')}
-              className="flex items-center gap-2 px-4 py-2 bg-emerald-600 text-white rounded-xl text-xs font-bold uppercase tracking-wider hover:bg-emerald-700 transition-colors"
-            >
-              <CheckCircle2 className="w-4 h-4" /> Ready
-            </button>
-          )}
-          {order.status === 'ready' && (
-            <button
-              onClick={() => onUpdateStatus(order.id, 'completed')}
-              className="flex items-center gap-2 px-4 py-2 bg-stone-800 text-white rounded-xl text-xs font-bold uppercase tracking-wider hover:bg-stone-900 transition-colors"
-            >
-              Finish
-            </button>
+          {role === 'owner' ? (
+            <div className="flex items-center px-3 py-2 bg-stone-50 text-stone-400 rounded-xl text-xs font-bold uppercase tracking-wider border border-stone-100">
+              View Only
+            </div>
+          ) : (
+            <>
+              {order.status === 'pending' && (
+                <>
+                  {order.paymentMethod === 'cash' && order.paymentStatus === 'pending' ? (
+                    <button
+                      onClick={() => onUpdateStatus(order.id, 'confirmed', 'paid')}
+                      className="flex items-center gap-2 px-4 py-2 bg-amber-600 text-white rounded-xl text-xs font-bold uppercase tracking-wider hover:bg-amber-700 transition-colors"
+                    >
+                      <Banknote className="w-4 h-4" /> Terima Cash
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => onUpdateStatus(order.id, 'confirmed')}
+                      className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-xl text-xs font-bold uppercase tracking-wider hover:bg-blue-700 transition-colors"
+                    >
+                      <CheckCircle2 className="w-4 h-4" /> Confirm
+                    </button>
+                  )}
+                </>
+              )}
+              {order.status === 'confirmed' && (
+                <button
+                  onClick={() => onUpdateStatus(order.id, 'preparing')}
+                  className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-xl text-xs font-bold uppercase tracking-wider hover:bg-purple-700 transition-colors"
+                >
+                  <Loader2 className="w-4 h-4" /> Prepare
+                </button>
+              )}
+              {order.status === 'preparing' && (
+                <button
+                  onClick={() => onUpdateStatus(order.id, 'ready')}
+                  className="flex items-center gap-2 px-4 py-2 bg-emerald-600 text-white rounded-xl text-xs font-bold uppercase tracking-wider hover:bg-emerald-700 transition-colors"
+                >
+                  <CheckCircle2 className="w-4 h-4" /> Ready
+                </button>
+              )}
+              {order.status === 'ready' && (
+                <button
+                  onClick={() => onUpdateStatus(order.id, 'completed')}
+                  className="flex items-center gap-2 px-4 py-2 bg-stone-800 text-white rounded-xl text-xs font-bold uppercase tracking-wider hover:bg-stone-900 transition-colors"
+                >
+                  Finish
+                </button>
+              )}
+            </>
           )}
         </div>
       </div>

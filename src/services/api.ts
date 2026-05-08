@@ -3,13 +3,21 @@ import { MOCK_MENU } from '../mockData';
 
 // Dummy secure backend service
 export const api = {
-  checkout: async (cartItems: CartItem[], tableId: string, promoCode?: string): Promise<Order> => {
+  checkout: async (
+    cartItems: CartItem[], 
+    tableId: string, 
+    promoCode?: string,
+    orderType: 'dine-in' | 'takeaway' = 'dine-in',
+    customer?: { name: string; phone: string },
+    paymentMethod: 'cash' | 'qris' | 'transfer' = 'qris'
+  ): Promise<Order> => {
     // Simulate network delay
     await new Promise(resolve => setTimeout(resolve, 800));
 
     // SECURE CALCULATION: Recalculate price on the "server" using authoritative MOCK_MENU
     let subtotal = 0;
     cartItems.forEach(item => {
+      if (item.quantity <= 0) throw new Error("Invalid quantity detected");
       const product = MOCK_MENU.find(m => m.id === item.menuItemId);
       if (product) {
         let itemPrice = product.basePrice;
@@ -74,7 +82,12 @@ export const api = {
       promoCode: promoCode ? promoCode.toUpperCase() : undefined,
       totalPrice,
       status: 'pending',
-      createdAt: new Date().toISOString()
+      createdAt: new Date().toISOString(),
+      orderType,
+      customerName: customer?.name,
+      customerPhone: customer?.phone,
+      paymentMethod,
+      paymentStatus: 'pending'
     };
 
     return newOrder;

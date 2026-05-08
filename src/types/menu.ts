@@ -121,6 +121,11 @@ export interface Order {
   discount?: number;
   promoCode?: string;
   totalPrice: number;
-  status: 'pending' | 'confirmed' | 'preparing' | 'ready' | 'completed' | 'failed';
+  status: 'pending' | 'confirmed' | 'preparing' | 'ready' | 'completed' | 'cancelled' | 'failed';
   createdAt: string;
+  orderType?: 'dine-in' | 'takeaway';
+  customerName?: string;
+  customerPhone?: string;
+  paymentMethod?: 'cash' | 'qris' | 'transfer';
+  paymentStatus?: 'pending' | 'paid';
 }

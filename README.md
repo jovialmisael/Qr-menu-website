@@ -29,11 +29,24 @@ A premium, mobile-first QR code ordering system for a café/bistro. Customers sc
 - **Support / Help** — FAQ and contact info view.
 - **User Profile** — Shows session info and provides an entry point to the admin panel.
 
-### Admin Panel
-- **Protected under `ProfileView → Admin`** — Accessible through the profile tab.
+### Admin Panel (Legacy)
+- **Protected under `ProfileView → Admin`** — Accessible through the profile tab for quick menu overrides.
 - **Menu Editor** — Toggle item availability, view SKU codes and pricing.
 - **Order Ledger** — A read-only record of all simulated orders.
-- **System Config** (placeholder — disabled in UI).
+
+### Staff & Management Dashboard (New)
+- **Dedicated Route** — Accessible via `/cashier` with role-based entry.
+- **PIN Authentication** — Secure login via numeric PIN:
+  - `1234` → **Cashier**: Full order management (preparing, ready, complete).
+  - `4321` → **Owner**: Exclusive analytics and reporting view.
+- **Live Order Stream** — Real-time synchronization with customer orders via `BroadcastChannel`.
+- **Order Processing** — Multi-stage pipeline: `Pending → Preparing → Ready → Completed`.
+- **Store Status Control** — Large, touch-friendly toggle to open/close the cafe globally.
+- **Advanced Reporting** (Owner Only):
+  - **KPI Dashboard** — At-a-glance revenue, transactions, and average order value.
+  - **Sales Trends** — Hourly distribution charts using Recharts.
+  - **Inventory Insights** — Stock level monitoring and "Out of Stock" risk analysis.
+  - **Data Export** — One-tap PDF and CSV generation for daily business reports.
 
 ---
 
@@ -54,10 +67,22 @@ src/
 │   ├── cart.store.ts        # Cart CRUD, total calc, persisted to localStorage
 │   ├── order.store.ts       # Active order + status simulation
 │   ├── stock.store.ts       # Per-item stock level overrides (admin)
-│   └── auth.store.ts        # Admin auth flag
+│   ├── auth.store.ts        # Admin auth flag
+│   └── report.store.ts      # (Mock) Sales and inventory history data
+│
+├── cashier/                 # Staff & Owner specific UI
+│   ├── CashierApp.tsx       # Entry point for /cashier route
+│   ├── OrderCard.tsx        # Individual order workflow manager
+│   └── ReportView.tsx       # Analytics & Data visualization dashboard
 │
 ├── hooks/
-│   └── useMenuFilter.ts     # Derived state: selectedCategoryId + filtered items
+│   ├── useMenuFilter.ts     # Derived state: selectedCategoryId + filtered items
+│   ├── useSalesReport.ts    # Analytics: revenue & transaction calculations
+│   └── useStockReport.ts    # Analytics: inventory health checks
+│
+├── utils/
+│   ├── ReportExporter.ts    # PDF/CSV generation logic (jspdf)
+│   └── formatters.ts        # Currency and date utility functions
 │
 ├── components/
 │   ├── layout/
@@ -109,6 +134,8 @@ src/
 | Styling | Tailwind CSS 3 + CSS custom properties (design tokens) |
 | Animation | [Framer Motion 11](https://www.framer.com/motion/) |
 | State Management | [Zustand 4](https://zustand-demo.pmnd.rs/) (with `persist` middleware) |
+| Visualization | [Recharts](https://recharts.org) |
+| PDF Export | [jspdf](https://github.com/parallax/jsPDF) + [autotable](https://github.com/simonbengtsson/jspdf-autotable) |
 | Icons | [Lucide React](https://lucide.dev) |
 | Utilities | `clsx`, `tailwind-merge` |
 

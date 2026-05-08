@@ -11,9 +11,11 @@ import {
   Bean,
   Plus,
   MessageSquare,
-  Zap
+  Zap,
+  ReceiptText
 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import ReceiptView from './ReceiptView';
 
 interface Props {
   onBackToMenu: () => void;
@@ -31,6 +33,7 @@ export default function OrderTrackingView({ onBackToMenu }: Props) {
   const { addItem } = useCartStore();
   const { items: menuItems } = useMenuStore();
   const [activeStep, setActiveStep] = useState(0);
+  const [showReceipt, setShowReceipt] = useState(false);
 
   const handleReorder = () => {
     if (!currentOrder) return;
@@ -77,6 +80,10 @@ export default function OrderTrackingView({ onBackToMenu }: Props) {
         </button>
       </div>
     );
+  }
+
+  if (showReceipt) {
+    return <ReceiptView order={currentOrder} onClose={() => setShowReceipt(false)} />;
   }
 
   return (
@@ -138,6 +145,22 @@ export default function OrderTrackingView({ onBackToMenu }: Props) {
              )}
            </div>
         </header>
+        
+        {currentOrder.paymentMethod === 'cash' && currentOrder.paymentStatus === 'pending' && (
+          <motion.div 
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-12 bg-amber-50 border border-amber-200 rounded-[2rem] p-8 text-center"
+          >
+            <div className="w-16 h-16 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Clock className="w-8 h-8" />
+            </div>
+            <h3 className="text-2xl font-display text-amber-900 mb-2">Menunggu Pembayaran</h3>
+            <p className="text-sm font-sans text-amber-700/80 mb-6">
+              Mohon segera menuju kasir untuk melakukan pembayaran sebesar <b>{new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(currentOrder.totalPrice)}</b> agar pesanan Anda dapat diproses.
+            </p>
+          </motion.div>
+        )}
 
         <div className="flex flex-col gap-16">
            {/* Vertical Timeline Ritual */}
@@ -240,6 +263,22 @@ export default function OrderTrackingView({ onBackToMenu }: Props) {
 
               {/* Corporate Action Block */}
               <div className="flex flex-col gap-3">
+                 {currentOrder.status === 'completed' && (
+                   <button 
+                     onClick={() => setShowReceipt(true)} 
+                     className="w-full bg-[var(--color-primary)]/10 text-[var(--color-primary)] border border-[var(--color-primary)]/20 rounded-[2rem] p-6 flex items-center justify-between group hover:bg-[var(--color-primary)]/20 transition-all shadow-sm active:scale-[0.98]"
+                   >
+                      <div className="flex items-center gap-5">
+                         <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center">
+                            <ReceiptText className="w-6 h-6 text-[var(--color-primary)]" />
+                         </div>
+                         <div className="text-left">
+                            <p className="text-[9px] font-label opacity-80 uppercase tracking-widest mb-1">TRANSACTION</p>
+                            <p className="text-xl font-display leading-tight">Lihat Struk Digital</p>
+                         </div>
+                      </div>
+                   </button>
+                 )}
                  <button 
                    onClick={handleReorder} 
                    className="w-full bg-[var(--color-primary)] text-white rounded-[2rem] p-6 flex items-center justify-between group hover:bg-[var(--color-primary)]/90 transition-all shadow-lg active:scale-[0.98]"

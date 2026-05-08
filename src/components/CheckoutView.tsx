@@ -3,11 +3,12 @@ import { useCartStore } from '../store/cart.store';
 import { useMenuStore } from '../store/menu.store';
 import { useOrderStore } from '../store/order.store';
 import { useStockStore } from '../store/stock.store';
-import { ArrowLeft, ArrowRight, Minus, Plus, Trash2, ChevronRight, User, Phone, Mail, QrCode, Receipt, CreditCard } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Minus, Plus, Trash2, ChevronRight, User, Phone, Mail, QrCode, Receipt, CreditCard, Check } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import { formatPrice } from '../utils/formatters';
 import { api } from '../services/api';
+import { CartItem, MenuItem } from '../types/menu';
 
 interface Props {
   onBack: () => void;
@@ -16,13 +17,13 @@ interface Props {
 
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
-function getItemPrice(cartItem: any, product: any) {
+function getItemPrice(cartItem: CartItem, product: MenuItem) {
   let price = product.basePrice;
   if (cartItem.options && product.meta) {
-    const sizeDef = product.meta.sizes?.find((s: any) => s.label === cartItem.options.size);
+    const sizeDef = product.meta.sizes?.find((s: any) => s.label === cartItem.options?.size);
     if (sizeDef) price = sizeDef.price;
-    if (cartItem.options.shots > 1) price += (cartItem.options.shots - 1) * 8000;
-    if (cartItem.options.syrup?.length > 0) price += cartItem.options.syrup.length * 6000;
+    if ((cartItem.options.shots ?? 0) > 1) price += (cartItem.options.shots! - 1) * 8000;
+    if ((cartItem.options.syrup?.length ?? 0) > 0) price += cartItem.options.syrup!.length * 6000;
     if (cartItem.options.milk && cartItem.options.milk !== 'Standard Whole Milk') price += 12000;
   } else {
     cartItem.selectedAddOns?.forEach((sel: any) => {
@@ -36,12 +37,12 @@ function getItemPrice(cartItem: any, product: any) {
   return price;
 }
 
-function getAddOnLabels(cartItem: any, product: any): string[] {
+function getAddOnLabels(cartItem: CartItem, product: MenuItem): string[] {
   const labels: string[] = [];
   if (cartItem.options && product.meta) {
     if (cartItem.options.size) labels.push(cartItem.options.size);
     if (cartItem.options.milk && cartItem.options.milk !== 'Standard Whole Milk') labels.push(cartItem.options.milk.split(' (')[0]);
-    if (cartItem.options.shots > 1) labels.push(`${cartItem.options.shots} Shots`);
+    if ((cartItem.options.shots ?? 0) > 1) labels.push(`${cartItem.options.shots} Shots`);
     if (cartItem.options.temperature) labels.push(cartItem.options.temperature.replace('Serve ', ''));
     if (cartItem.options.sweetness && cartItem.options.sweetness !== 'Normal Sweet') labels.push(cartItem.options.sweetness);
   } else {
@@ -57,7 +58,25 @@ function getAddOnLabels(cartItem: any, product: any): string[] {
 }
 
 // ─── Step 1: Order Review (The Ledger) ──────────────────────────────────────────
-function OrderReview({ onBack, onNext, cartItems, menuItems, subtotal, tax, service, discount, total, removeItem, updateQuantity, promoCode, setPromoCode, handleApplyPromo, appliedPromo }: any) {
+interface OrderReviewProps {
+  onBack: () => void;
+  onNext: () => void;
+  cartItems: CartItem[];
+  menuItems: MenuItem[];
+  subtotal: number;
+  tax: number;
+  service: number;
+  discount: number;
+  total: number;
+  removeItem: (id: string) => void;
+  updateQuantity: (id: string, delta: number) => void;
+  promoCode: string;
+  setPromoCode: (code: string) => void;
+  handleApplyPromo: () => void;
+  appliedPromo: string;
+}
+
+function OrderReview({ onBack, onNext, cartItems, menuItems, subtotal, tax, service, discount, total, removeItem, updateQuantity, promoCode, setPromoCode, handleApplyPromo, appliedPromo }: OrderReviewProps) {
   return (
     <div className="flex flex-col h-full bg-[var(--color-surface)]">
       {/* Editorial Header */}
@@ -91,8 +110,8 @@ function OrderReview({ onBack, onNext, cartItems, menuItems, subtotal, tax, serv
            </div>
 
            <div className="space-y-6">
-             {cartItems.map((cartItem: any) => {
-               const product = menuItems.find((m: any) => m.id === cartItem.menuItemId);
+             {cartItems.map((cartItem: CartItem) => {
+               const product = menuItems.find((m: MenuItem) => m.id === cartItem.menuItemId);
                if (!product) return null;
                const itemPrice = getItemPrice(cartItem, product);
                const addOns = getAddOnLabels(cartItem, product);
@@ -191,7 +210,7 @@ function OrderReview({ onBack, onNext, cartItems, menuItems, subtotal, tax, serv
            </div>
 
            <div className="flex justify-between items-end">
-              <span className="text-sm font-sans text-stone-500 italic">Registry Tax (10%)</span>
+              <span className="text-sm font-sans text-stone-500 italic">PB1 / Pajak Restoran (10%)</span>
               <span className="text-sm font-sans font-bold text-stone-800">{formatPrice(tax)}</span>
            </div>
 
@@ -224,18 +243,33 @@ const PAYMENT_METHODS = [
   { id: 'cash', label: 'Pay at Cashier', desc: 'Cash or e-wallet at counter', icon: Receipt, color: 'bg-stone-500' },
 ];
 
-function PaymentStep({ onBack, onPay, total, isProcessing }: any) {
+interface PaymentStepProps {
+  onBack: () => void;
+  onPay: (orderType: 'dine-in' | 'takeaway', customer: { name: string; phone: string; email: string }, paymentMethod: string) => void;
+  total: number;
+  isProcessing: boolean;
+}
+
+function PaymentStep({ onBack, onPay, total, isProcessing }: PaymentStepProps) {
   const [method, setMethod] = useState('qris');
+  const [orderType, setOrderType] = useState<'dine-in' | 'takeaway'>('dine-in');
   const [form, setForm] = useState({ name: '', phone: '', email: '' });
+  const [consent, setConsent] = useState(false);
   const [attempted, setAttempted] = useState(false);
+
+  const sanitizeInput = (str: string) => str.replace(/[<>]/g, '').trim();
 
   const isNameValid  = form.name.trim().length > 2;
   const isPhoneValid = /^(08|\+62|62)[0-9]{7,12}$/.test(form.phone.replace(/[\s-]/g, ''));
-  const canPay       = isNameValid && isPhoneValid;
+  const canPay       = isNameValid && isPhoneValid && consent;
 
   const handlePayClick = () => {
     if (!canPay) { setAttempted(true); return; }
-    onPay();
+    onPay(orderType, {
+      name: sanitizeInput(form.name),
+      phone: sanitizeInput(form.phone),
+      email: sanitizeInput(form.email)
+    }, method);
   };
 
   const fieldClass = (valid: boolean) =>
@@ -267,6 +301,30 @@ function PaymentStep({ onBack, onPay, total, isProcessing }: any) {
 
       <div className="flex-1 overflow-y-auto no-scrollbar pb-44">
         <div className="px-6 pt-8 pb-4 space-y-8">
+
+          {/* ── Order Type Selection ── */}
+          <div>
+            <p className="text-[10px] font-label uppercase tracking-[0.35em] text-stone-400 mb-4">
+              Dining Preference
+            </p>
+            <div className="flex bg-stone-100/80 rounded-2xl p-1 relative mb-8">
+              <div 
+                className={`absolute top-1 bottom-1 w-[calc(50%-4px)] bg-white rounded-xl shadow-sm border border-stone-200/50 transition-all duration-300 ease-in-out ${orderType === 'takeaway' ? 'translate-x-[calc(100%+4px)]' : 'translate-x-0'}`}
+              />
+              <button 
+                onClick={() => setOrderType('dine-in')}
+                className={`flex-1 relative z-10 py-3 text-xs font-bold uppercase tracking-widest transition-colors ${orderType === 'dine-in' ? 'text-[var(--color-primary)]' : 'text-stone-400 hover:text-stone-600'}`}
+              >
+                Dine In
+              </button>
+              <button 
+                onClick={() => setOrderType('takeaway')}
+                className={`flex-1 relative z-10 py-3 text-xs font-bold uppercase tracking-widest transition-colors ${orderType === 'takeaway' ? 'text-[var(--color-primary)]' : 'text-stone-400 hover:text-stone-600'}`}
+              >
+                Take Away
+              </button>
+            </div>
+          </div>
 
           {/* ── Customer Info ── */}
           <div>
@@ -321,6 +379,27 @@ function PaymentStep({ onBack, onPay, total, isProcessing }: any) {
                   onChange={e => setForm({ ...form, email: e.target.value })}
                 />
               </div>
+
+              {/* UU PDP Consent */}
+              <label className="flex items-start gap-3 mt-4 group cursor-pointer">
+                <div className="relative flex items-center justify-center mt-0.5">
+                  <input
+                    type="checkbox"
+                    className="w-5 h-5 appearance-none border-2 border-stone-200 rounded-md checked:bg-[var(--color-primary)] checked:border-[var(--color-primary)] transition-all cursor-pointer"
+                    checked={consent}
+                    onChange={(e) => setConsent(e.target.checked)}
+                  />
+                  {consent && <Check className="w-3.5 h-3.5 text-white absolute pointer-events-none" />}
+                </div>
+                <div className="flex-1">
+                  <p className="text-xs font-sans text-stone-600 leading-relaxed">
+                    Saya menyetujui pengumpulan dan pemrosesan data pribadi saya untuk keperluan pesanan sesuai dengan UU Perlindungan Data Pribadi (UU PDP).
+                  </p>
+                  {attempted && !consent && (
+                    <p className="text-[10px] text-red-500 mt-1 font-sans">Persetujuan wajib dicentang untuk melanjutkan.</p>
+                  )}
+                </div>
+              </label>
             </div>
           </div>
 
@@ -401,7 +480,7 @@ function PaymentStep({ onBack, onPay, total, isProcessing }: any) {
 export default function CheckoutView({ onBack, onSuccess }: Props) {
   const { items: cartItems, removeItem, updateQuantity, clearCart, calculateTotal } = useCartStore();
   const { items: menuItems } = useMenuStore();
-  const { createOrder } = useOrderStore();
+  const { createOrder, settings } = useOrderStore();
   const { deductStock } = useStockStore();
   const [step, setStep] = useState<'review' | 'payment'>('review');
   const [isProcessing, setIsProcessing] = useState(false);
@@ -410,8 +489,8 @@ export default function CheckoutView({ onBack, onSuccess }: Props) {
 
   const subtotal = calculateTotal(menuItems);
   const discount = appliedPromo === 'BERSEJUK20' ? subtotal * 0.20 : 0;
-  const service = (subtotal - discount) * 0.05;
-  const tax = (subtotal - discount + service) * 0.11;
+  const service = (subtotal - discount) * settings.serviceChargeRate;
+  const tax = (subtotal - discount + service) * settings.taxRate;
   const total = subtotal - discount + service + tax;
 
   const handleApplyPromo = () => {
@@ -423,20 +502,32 @@ export default function CheckoutView({ onBack, onSuccess }: Props) {
     }
   };
 
-  const handlePay = async () => {
+  const [lastCheckoutTime, setLastCheckoutTime] = useState(0);
+
+  const handlePay = async (orderType: 'dine-in' | 'takeaway', customer: { name: string; phone: string }, paymentMethod: string) => {
+    const now = Date.now();
+    if (now - lastCheckoutTime < 5000) {
+      alert("Mohon tunggu sebentar sebelum membuat pesanan baru (Rate Limit).");
+      return;
+    }
+    setLastCheckoutTime(now);
+
     setIsProcessing(true);
     try {
       // API call to the dummy secure backend
-      const newOrder = await api.checkout(cartItems, '42', appliedPromo);
+      const newOrder = await api.checkout(cartItems, '42', appliedPromo, orderType, customer, paymentMethod as any);
       
       // Update stores
-      cartItems.forEach(cartItem => deductStock(cartItem.menuItemId, cartItem.quantity));
+      cartItems.forEach(cartItem => {
+        const item = menuItems.find(m => m.id === cartItem.menuItemId);
+        deductStock(cartItem.menuItemId, cartItem.quantity, item?.name || 'Unknown Item', customer.name || 'customer');
+      });
       createOrder(newOrder);
       clearCart();
       
       // Notify cashier
       const channel = new BroadcastChannel('bersejuk-order-sync');
-      channel.postMessage({ type: 'NEW_ORDER' });
+      channel.postMessage({ type: 'NEW_ORDER', __secureToken: 'bsjk-secure-v1' });
       setTimeout(() => channel.close(), 100);
 
       onSuccess();

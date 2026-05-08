@@ -4,6 +4,7 @@ import { MOCK_MENU, MOCK_CATEGORIES } from './mockData';
 import { useCartStore } from './store/cart.store';
 import { useOrderStore } from './store/order.store';
 import { AnimatePresence, motion } from 'framer-motion';
+import { Store } from 'lucide-react';
 
 const ORDER_CHANNEL = 'bersejuk-order-sync';
 
@@ -40,6 +41,7 @@ function App() {
 
   // App Navigation
   const [currentView, setCurrentView] = useState<ViewState>('menu');
+  const [isCafeOpen, setIsCafeOpen] = useState(true);
 
   // Filtering & Search Hook
   const {
@@ -64,16 +66,40 @@ function App() {
 
   // ── Real-time sync: listen for cashier status updates via BroadcastChannel ──
   useEffect(() => {
+    const checkCafeStatus = () => {
+      const data = localStorage.getItem('cafe-order-storage');
+      if (data) {
+        try {
+          const parsed = JSON.parse(data);
+          if (parsed?.state?.settings) {
+            setIsCafeOpen(parsed.state.settings.isOpen ?? true);
+          }
+        } catch (e) {}
+      }
+    };
+    checkCafeStatus();
+
     const channel = new BroadcastChannel(ORDER_CHANNEL);
     channel.onmessage = (e) => {
+      if (e.data?.__secureToken !== 'bsjk-secure-v1') return; // Security Check
       if (e.data?.type === 'STATUS_UPDATE') {
+        checkCafeStatus();
         const state = useOrderStore.getState();
-        if (state.currentOrder && state.currentOrder.id === e.data.orderId) {
+        if (state.currentOrder && state.currentOrder.id === e.data.orderId && e.data.status) {
           state.updateStatus(e.data.status);
         }
       }
     };
-    return () => channel.close();
+
+    const handleStorage = (e: StorageEvent) => {
+      if (e.key === 'cafe-order-storage') checkCafeStatus();
+    };
+    window.addEventListener('storage', handleStorage);
+
+    return () => {
+      channel.close();
+      window.removeEventListener('storage', handleStorage);
+    };
   }, []);
 
   useEffect(() => {
@@ -168,6 +194,18 @@ function App() {
   return (
     <div className="min-h-[100dvh] bg-stone-200/50 flex justify-center font-body">
       <div className="w-full max-w-[480px] h-[100dvh] bg-[var(--color-surface)] relative overflow-hidden flex flex-col shadow-2xl">
+
+        {/* Closed Overlay */}
+        {!isCafeOpen && currentView !== 'admin' && (
+          <div className="absolute inset-0 z-50 bg-stone-900/95 backdrop-blur-sm flex flex-col items-center justify-center p-6 text-center">
+             <div className="w-20 h-20 bg-stone-800 rounded-full flex items-center justify-center mb-6">
+                <Store className="w-10 h-10 text-stone-400" />
+             </div>
+             <h2 className="text-2xl font-display font-bold text-white mb-3">Kafe Sedang Tutup</h2>
+             <p className="text-stone-400 mb-8 max-w-xs">Maaf, kami sedang tidak menerima pesanan saat ini. Silakan kembali lagi nanti pada jam operasional kami.</p>
+             <button onClick={() => setCurrentView('admin')} className="text-xs text-stone-600 uppercase tracking-widest font-bold">Admin Login</button>
+          </div>
+        )}
 
         {/* ─── MAIN SHELL (menu home, roasts, history, help, profile) ─── */}
         {isMainShellView && (

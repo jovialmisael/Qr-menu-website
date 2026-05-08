@@ -21,12 +21,10 @@ export default function OrderHistoryView({ onBackToMenu, onTrackOrder }: Props) 
 
   const handleReorder = (order: any) => {
     order.items.forEach((item: any) => {
-      addItem({
-        menuItemId: item.menuItemId,
-        quantity: item.quantity,
-        selectedAddOns: item.selectedAddOns,
-        options: item.options
-      });
+      const product = menuItems.find((m) => m.id === item.menuItemId);
+      if (product) {
+        addItem(product, item.selectedAddOns || [], item.quantity, item.options, item.sku_code);
+      }
     });
     onBackToMenu();
   };
